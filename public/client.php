@@ -146,6 +146,8 @@ switch ($action) {
         $client = $clientModel->getClientByEmail($email);
         if ($client && password_verify($motDePasse, $client['mot_de_passe'])) {
             $_SESSION['client_id'] = $client['id']; // Définir l'ID du client dans la session
+            $_SESSION['client_prenom'] = $client['prenom']; // Définir le prénom du client dans la session
+            $_SESSION['client_nom'] = $client['nom']; // Définir le nom du client dans la session
             header('Location: client.php?action=espaceClient'); // Rediriger vers l'espace client
             exit();
         } else {

@@ -22,13 +22,7 @@
            <input type="text" id="telephone" name="telephone" required>
            <br>
            <label for="adresse">Adresse :</label>
-           <input type="text" id="numero_rue" name="numero_rue" placeholder="Numéro de rue" required>
-           <input type="text" id="nom_rue" name="nom_rue" placeholder="Nom de rue" required>
-           <input type="text" id="code_postal" name="code_postal" placeholder="Code postal" required>
-           <input type="text" id="ville" name="ville" placeholder="Ville" required>
-           <br>
-           <label for="adresse_complementaire">Adresse complémentaire (facultatif) :</label>
-           <input type="text" id="adresse_complementaire" name="adresse_complementaire">
+           <input type="text" id="adresse" name="adresse" required>
            <br>
            <button type="submit">Ajouter le client</button>
        </form>

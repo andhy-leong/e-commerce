@@ -23,11 +23,27 @@ class AdminClientController {
     }
     
     public function ajouterClient($data) {
-        // Logique pour ajouter un client...
+        if (!empty($data['nom']) && !empty($data['prenom']) && !empty($data['email']) && !empty($data['mot_de_passe']) && !empty($data['telephone']) && !empty($data['adresse'])) {
+            // Vous pouvez également ajouter une vérification pour l'unicité de l'email ici
+            $this->clientModel->addClient($data);
+            header('Location: admin.php?action=afficherClients');
+            exit();
+        } else {
+            echo "Tous les champs sont requis.";
+        }
     }
     
     public function supprimerClient($id) {
-        // Logique pour supprimer un client...
+        // Supprimer d'abord les commandes associées
+        $this->commandeModel->deleteClientOrders($id);
+        
+        // Ensuite, supprimer le client
+        if ($this->clientModel->deleteClient($id)) {
+            header('Location: admin.php?action=afficherClients');
+            exit();
+        } else {
+            echo "Erreur lors de la suppression du client.";
+        }
     }
     
     public function supprimerCommande($commandeId) {

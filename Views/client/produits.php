@@ -7,10 +7,10 @@
 <body>
     <h1>Liste des Produits</h1>
 
-    <!-- Affichage du message de succès -->
+    
     <?php if (isset($_SESSION['message'])): ?>
         <p style="color: green;"><?= htmlspecialchars($_SESSION['message']) ?></p>
-        <?php unset($_SESSION['message']); // Supprimez le message après l'affichage ?>
+        <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
 
     <!-- Barre de recherche -->
@@ -36,7 +36,7 @@
 
     <!-- Affichage du nom du client ou lien de connexion/inscription -->
     <?php if (isset($_SESSION['client_id'])): ?>
-        <p>Bienvenue, <?= htmlspecialchars($_SESSION['client_prenom'] . ' ' . $_SESSION['client_nom']) ?></p>
+        <p>Bienvenue, <?= htmlspecialchars($_SESSION['client_prenom'] ) . ' ' . htmlspecialchars($_SESSION['client_nom'] ) ?></p>
         <a href="client.php?action=espaceClient">Accéder à mon espace client</a>
     <?php else: ?>
         <a href="client.php?action=loginForm">Se connecter / S'inscrire</a>

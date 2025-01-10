@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/mail.php';
+
 class Commande {
     private $db;
 
@@ -14,7 +16,7 @@ class Commande {
 
     public function getCommandeDetails($commandeId) {
         $query = $this->db->prepare("
-            SELECT c.numero_commande, c.date, cp.quantite, p.titre, p.prix_public
+            SELECT c.numero_commande, c.date, c.client_id, cp.quantite, p.titre, p.prix_public
             FROM commandes c
             JOIN commande_produits cp ON c.id = cp.commande_id
             JOIN produits p ON cp.produit_id = p.identifiant
@@ -25,6 +27,16 @@ class Commande {
     }
 
     public function addCommande($clientId, $totalHt, $totalTtc) {
+        // Vérifiez si le client existe
+        $clientQuery = $this->db->prepare("SELECT COUNT(*) FROM clients WHERE id = :client_id");
+        $clientQuery->execute(['client_id' => $clientId]);
+        $clientExists = $clientQuery->fetchColumn();
+
+        if (!$clientExists) {
+            throw new Exception("Le client avec l'ID $clientId n'existe pas.");
+        }
+
+        // Ajoutez la commande
         $query = $this->db->prepare("INSERT INTO commandes (client_id, date, montant, total_ht, total_ttc, statut) VALUES (:client_id, NOW(), :montant, :total_ht, :total_ttc, 'En attente')");
         $query->execute([
             'client_id' => $clientId,
@@ -44,19 +56,58 @@ class Commande {
             'id' => $commandeId
         ]);
 
+        // Récupérer les informations du client pour l'e-mail
+        $clientInfo = $this->getClientInfo($clientId);
+        $orderDetails = "Numéro de commande: $numeroCommande<br>Montant total: $totalTtc €"; // Ajoutez d'autres détails si nécessaire
+
+        // Envoyer l'e-mail de confirmation
+        sendOrderConfirmation($clientInfo['email'], $clientInfo['prenom'], $orderDetails);
+
         return $commandeId;
     }
 
     public function addCommandeProduit($commandeId, $produitId, $quantite, $montant) {
+        // Ajoutez la commande produit
         $query = $this->db->prepare("INSERT INTO commande_produits (commande_id, produit_id, quantite, montant) VALUES (:commande_id, :produit_id, :quantite, :montant)");
-        return $query->execute([
+        $query->execute([
             'commande_id' => $commandeId,
             'produit_id' => $produitId,
             'quantite' => $quantite,
             'montant' => $montant
         ]);
+
+        // Mettre à jour le stock du produit
+        $produitModel = new Produit($this->db); // Assurez-vous d'importer le modèle Produit
+        $produitModel->updateStock($produitId, $quantite); // Soustraire la quantité du stock
+
+        return $query->rowCount(); // Retourner le nombre de lignes affectées
     }
 
-    // Autres méthodes...
+    public function getClientInfo($clientId) {
+        $query = $this->db->prepare("SELECT nom, prenom, email, telephone, adresse FROM clients WHERE id = :client_id");
+        $query->execute(['client_id' => $clientId]);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteClientOrders($clientId) {
+        // Récupérer toutes les commandes du client
+        $query = $this->db->prepare("SELECT id FROM commandes WHERE client_id = :client_id");
+        $query->execute(['client_id' => $clientId]);
+        $commandes = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        // Supprimer les produits associés à chaque commande
+        foreach ($commandes as $commande) {
+            $this->deleteCommandeProduits($commande['id']);
+        }
+
+        // Supprimer les commandes
+        $query = $this->db->prepare("DELETE FROM commandes WHERE client_id = :client_id");
+        return $query->execute(['client_id' => $clientId]);
+    }
+
+    public function deleteCommandeProduits($commandeId) {
+        $query = $this->db->prepare("DELETE FROM commande_produits WHERE commande_id = :commande_id");
+        return $query->execute(['commande_id' => $commandeId]);
+    }
 }
 ?>

@@ -58,6 +58,15 @@ class Produit {
         $query->execute(['id' => $id]);
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function updateStock($produitId, $quantite) {
+        // Soustraire la quantité du stock
+        $query = $this->db->prepare("UPDATE produits SET quantite_stock = quantite_stock - :quantite WHERE identifiant = :produit_id");
+        return $query->execute([
+            'quantite' => $quantite,
+            'produit_id' => $produitId
+        ]);
+    }
     
     // Autres méthodes existantes...
 }

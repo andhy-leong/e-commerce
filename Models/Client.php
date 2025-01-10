@@ -18,7 +18,7 @@ class Client {
             'nom' => $data['nom'],
             'prenom' => $data['prenom'],
             'email' => $data['email'],
-            'mot_de_passe' => $data['mot_de_passe'],
+            'mot_de_passe' => password_hash($data['mot_de_passe'], PASSWORD_DEFAULT),
             'telephone' => $data['telephone'],
             'adresse' => $data['adresse']
         ]);

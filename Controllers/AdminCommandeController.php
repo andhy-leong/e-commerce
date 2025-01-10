@@ -18,8 +18,12 @@ class AdminCommandeController {
 
     public function afficherDetailsCommande($commandeId) {
         $details = $this->commandeModel->getCommandeDetails($commandeId);
-        $clientInfo = $this->commandeModel->getClientInfo($details[0]['client_id']);
-        require __DIR__ . '/../Views/admin/detailsCommande.php';
+        if (!empty($details)) {
+            $clientInfo = $this->commandeModel->getClientInfo($details[0]['client_id']);
+            require __DIR__ . '/../Views/admin/detailsCommande.php';
+        } else {
+            echo "Aucune commande trouvée.";
+        }
     }
 }
 ?>
