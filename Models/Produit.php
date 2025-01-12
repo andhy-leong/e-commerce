@@ -60,12 +60,21 @@ class Produit {
     }
 
     public function updateStock($produitId, $quantite) {
-        // Ajouter la quantité au stock
-        $query = $this->db->prepare("UPDATE produits SET quantite_stock = quantite_stock - :quantite WHERE identifiant = :produit_id");
-        return $query->execute([
-            'quantite' => $quantite,
-            'produit_id' => $produitId
-        ]);
+        // Récupérer la quantité actuelle en stock
+        $produit = $this->getProduitById($produitId);
+        $quantiteActuelle = $produit['quantite_stock'];
+
+        // Vérifier si la quantité demandée est disponible
+        if ($quantiteActuelle >= $quantite) {
+            // Soustraire la quantité du stock
+            $query = $this->db->prepare("UPDATE produits SET quantite_stock = quantite_stock - :quantite WHERE identifiant = :produit_id");
+            return $query->execute([
+                'quantite' => $quantite,
+                'produit_id' => $produitId
+            ]);
+        } else {
+            throw new Exception("Quantité demandée non disponible en stock.");
+        }
     }
 
     }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -76,10 +77,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -98,10 +99,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -120,10 +121,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -142,10 +143,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -164,10 +165,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -186,10 +187,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -208,10 +209,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -230,10 +231,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -252,10 +253,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -274,10 +275,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -296,10 +297,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -318,10 +319,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>
@@ -340,10 +341,10 @@
                     <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
                     <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
                     <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
                     </td>
                 </tr>

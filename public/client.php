@@ -137,7 +137,11 @@ switch ($action) {
                 $produit = $produitController->getProduitById($produitId);
                 if ($produit) {
                     $montant = $produit['prix_public'] * $quantite; // Montant pour ce produit
-                    $commandeModel->addCommandeProduit($commandeId, $produitId, $quantite, $montant); // Appel à la méthode
+                    try {
+                        $commandeModel->addCommandeProduit($commandeId, $produitId, $quantite, $montant);
+                    } catch (Exception $e) {
+                        echo "Erreur : " . $e->getMessage();
+                    }
                 }
             }
 

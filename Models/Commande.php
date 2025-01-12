@@ -67,20 +67,27 @@ class Commande {
     }
 
     public function addCommandeProduit($commandeId, $produitId, $quantite, $montant) {
-        // Ajoutez la commande produit
-        $query = $this->db->prepare("INSERT INTO commande_produits (commande_id, produit_id, quantite, montant) VALUES (:commande_id, :produit_id, :quantite, :montant)");
-        $query->execute([
-            'commande_id' => $commandeId,
-            'produit_id' => $produitId,
-            'quantite' => $quantite,
-            'montant' => $montant
-        ]);
+        // Vérifier la disponibilité du stock avant d'ajouter la commande produit
+        $produitModel = new Produit($this->db);
+        $produit = $produitModel->getProduitById($produitId);
 
-        // Mettre à jour le stock du produit
-        $produitModel = new Produit($this->db); // Assurez-vous d'importer le modèle Produit
-        $produitModel->updateStock($produitId, $quantite); // Soustraire la quantité du stock
+        if ($produit['quantite_stock'] >= $quantite) {
+            // Ajoutez la commande produit
+            $query = $this->db->prepare("INSERT INTO commande_produits (commande_id, produit_id, quantite, montant) VALUES (:commande_id, :produit_id, :quantite, :montant)");
+            $query->execute([
+                'commande_id' => $commandeId,
+                'produit_id' => $produitId,
+                'quantite' => $quantite,
+                'montant' => $montant
+            ]);
 
-        return $query->rowCount(); // Retourner le nombre de lignes affectées
+            // Mettre à jour le stock du produit
+            $produitModel->updateStock($produitId, $quantite);
+
+            return $query->rowCount(); // Retourner le nombre de lignes affectées
+        } else {
+            throw new Exception("Quantité demandée non disponible en stock.");
+        }
     }
 
     public function getClientInfo($clientId) {

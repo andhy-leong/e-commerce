@@ -1,0 +1,44 @@
+header {
+    display:flex;
+    align-items: center; 
+    justify-content: space-between; 
+    background-color: #963B38; 
+    padding-top: 5px;
+}
+
+
+header div img {
+    max-height: 100px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+}
+
+/* Cibler uniquement le champ de recherche */
+form input[type="text"] {
+    width: 400px; /* Largeur du champ */
+    height: 40px; /* Hauteur du champ */
+    padding: 5px 10px; /* Espacement interne */
+    font-size: 16px; /* Taille de police */
+    border: 1px solid #ccc; /* Bordure */
+    border-radius: 5px; /* Coins arrondis */
+    box-sizing: border-box; /* Inclure la bordure dans la largeur/hauteur */
+}
+
+/* Exemple pour le bouton, pour qu'il s'aligne avec la barre */
+form button {
+    height: 40px; /* Même hauteur que le champ texte */
+    padding: 0 15px; /* Espacement interne */
+    font-size: 16px; /* Taille de police */
+    background-color: #994e4c; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none; /* Supprimer la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointer pour indiquer clic possible */
+}
+
+form button:hover {
+    background-color: #b55754; /* Couleur au survol */
+}
