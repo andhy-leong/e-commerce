@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion des Clients</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <h1>Liste des Clients</h1>
-    <a href="admin.php?action=ajouterClientForm">Ajouter un client</a>
+    <a href="admin.php?action=ajouterClientForm">Inscrire un client</a>
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
@@ -22,6 +37,7 @@
         <tbody>
             <?php foreach ($clients as $client): ?>
                 <tr>
+                    <td><?= htmlspecialchars($client['id']) ?></td>
                     <td><?= htmlspecialchars($client['nom']) ?></td>
                     <td><?= htmlspecialchars($client['prenom']) ?></td>
                     <td><?= htmlspecialchars($client['email']) ?></td>
@@ -30,11 +46,19 @@
                     <td>
                         <?php if (!empty($client['commandes'])): ?>
                             <ul>
-                                <?php foreach ($client['commandes'] as $commande): ?>
+                                <?php 
+                                $commandesAffichees = []; // Tableau pour suivre les commandes affichées
+                                foreach ($client['commandes'] as $commande): 
+                                    if (!in_array($commande['numero_commande'], $commandesAffichees)): // Vérifiez si la commande a déjà été affichée
+                                        $commandesAffichees[] = $commande['numero_commande']; // Ajoutez à la liste des affichées
+                                ?>
                                     <li>
                                         Commande #<?= htmlspecialchars($commande['numero_commande']) ?> - Date: <?= htmlspecialchars($commande['date']) ?> - Montant: <?= htmlspecialchars($commande['montant']) ?> €
                                     </li>
-                                <?php endforeach; ?>
+                                <?php 
+                                    endif; 
+                                endforeach; 
+                                ?>
                             </ul>
                         <?php else: ?>
                             Aucune commande passée.

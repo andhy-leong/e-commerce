@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Espace Client</title>
+    <style>
+        /* Ajoutez vos styles ici */
+    </style>
 </head>
 <body>
     <h1>Bienvenue dans votre espace client</h1>
@@ -40,13 +43,6 @@
         <button type="submit">Changer le mot de passe</button>
     </form>
 
-    <h2>Vos commandes</h2>
-    <ul>
-        <?php foreach ($commandes as $commande): ?>
-            <li>
-                Commande #<?= htmlspecialchars($commande['numero_commande']) ?> - Date: <?= htmlspecialchars($commande['date']) ?> - Montant: <?= htmlspecialchars($commande['montant']) ?> €
-            </li>
-        <?php endforeach; ?>
-    </ul>
+
 </body>
 </html>

@@ -40,6 +40,11 @@
                     <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
                     <td>
                         <a href="admin.php?action=supprimerProduit&id=<?= htmlspecialchars($produit['identifiant'] ?? '') ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
+                        <form action="admin.php?action=modifierQuantite" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
+                            <input type="number" name="quantite" min="1" placeholder="Ajouter quantité" required>
+                            <button type="submit">Ajouter au stock</button>
+                        </form>
                     </td>
                 </tr>
             <?php endforeach; ?>

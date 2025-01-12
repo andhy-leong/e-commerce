@@ -47,6 +47,24 @@ class Client {
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function emailExists($email) {
+        $query = $this->db->prepare("SELECT COUNT(*) FROM clients WHERE email = :email");
+        $query->execute(['email' => $email]);
+        return $query->fetchColumn() > 0; // Retourne true si l'e-mail existe
+    }
+
+    public function updateClientInfo($clientId, $data) {
+        $query = $this->db->prepare("UPDATE clients SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, adresse = :adresse WHERE id = :id");
+        return $query->execute([
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'email' => $data['email'],
+            'telephone' => $data['telephone'],
+            'adresse' => $data['adresse'],
+            'id' => $clientId
+        ]);
+    }
+
     // Autres méthodes...
 }
 ?>

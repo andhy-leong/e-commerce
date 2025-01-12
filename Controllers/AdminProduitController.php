@@ -34,5 +34,26 @@ class AdminProduitController {
             echo "Erreur lors de la suppression du produit.";
         }
     }
+
+    public function modifierQuantite() {
+        $produitId = $_POST['id'] ?? null;
+        $quantite = $_POST['quantite'] ?? 0;
+    
+        echo '<pre>';
+        echo "Produit ID: $produitId\n";
+        echo "Quantité à ajouter: $quantite\n";
+        echo '</pre>';
+    
+        if ($produitId && $quantite > 0) {
+            if ($this->produitModel->updateStock($produitId, $quantite)) {
+                header('Location: admin.php?action=afficherProduits');
+                exit();
+            } else {
+                echo "Erreur lors de la mise à jour du stock.";
+            }
+        } else {
+            echo "Erreur : ID de produit ou quantité invalide.";
+        }
+    }
 }
 ?>

@@ -16,15 +16,20 @@ class AdminClientController {
     
     public function afficherClients($searchTerm = '', $sort = 'nom_asc') {
         $clients = $this->clientModel->getAllClients();
-        foreach ($clients as &$client) {
-            $client['commandes'] = $this->clientModel->getClientOrders($client['id']);
+        $clientsAssociatifs = [];
+        foreach ($clients as $client) {
+            $clientsAssociatifs[$client['id']] = $client; // Utilisez l'ID comme clé
         }
         require __DIR__ . '/../Views/admin/clients.php';
     }
     
     public function ajouterClient($data) {
         if (!empty($data['nom']) && !empty($data['prenom']) && !empty($data['email']) && !empty($data['mot_de_passe']) && !empty($data['telephone']) && !empty($data['adresse'])) {
-            // Vous pouvez également ajouter une vérification pour l'unicité de l'email ici
+            // Vérifiez si l'email existe déjà
+            if ($this->clientModel->emailExists($data['email'])) {
+                echo "L'email existe déjà.";
+                return;
+            }
             $this->clientModel->addClient($data);
             header('Location: admin.php?action=afficherClients');
             exit();

@@ -2,10 +2,12 @@
 session_start();
 
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../Controllers/ClientController.php';
 require_once __DIR__ . '/../Controllers/ClientProduitController.php';
 require_once __DIR__ . '/../Models/Client.php';
 require_once __DIR__ . '/../Models/Commande.php';
 
+$clientController = new ClientController();
 $produitController = new ClientProduitController();
 $clientModel = new Client($db);
 $commandeModel = new Commande($db);
@@ -25,8 +27,41 @@ switch ($action) {
         require __DIR__ . '/../Views/client/register.php';
         break;
     case 'register':
-        // Logique d'inscription...
-        break;
+        var_dump($_POST);
+        $nom = $_POST['nom'] ?? '';
+        $prenom = $_POST['prenom'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $telephone = $_POST['telephone'] ?? '';
+        $numero_rue = $_POST['numero_rue'] ?? '';
+        $nom_rue = $_POST['nom_rue'] ?? '';
+        $code_postal = $_POST['code_postal'] ?? '';
+        $ville = $_POST['ville'] ?? '';
+        $mot_de_passe = $_POST['mot_de_passe'] ?? '';
+
+        // Validation des données
+        if (empty($nom) || empty($prenom) || empty($email) || empty($telephone) || empty($numero_rue) || empty($nom_rue) || empty($code_postal) || empty($ville) || empty($mot_de_passe)) {
+            echo "Tous les champs sont requis.";
+            break;
+        }
+
+        // Vérifiez si l'e-mail existe déjà
+        if ($clientModel->emailExists($email)) {
+            echo "L'adresse e-mail est déjà utilisée.";
+            break;
+        }
+
+        // Logique d'inscription (ajoutez votre code ici pour enregistrer le client)
+        $clientModel->addClient([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email,
+            'telephone' => $telephone,
+            'adresse' => "$numero_rue $nom_rue, $code_postal $ville", // Combinez les champs d'adresse
+            'mot_de_passe' => $mot_de_passe
+        ]);
+
+        header('Location: client.php?action=loginForm'); // Rediriger vers la page de connexion après l'inscription
+        exit();
     case 'afficherPanier':
         require __DIR__ . '/../Views/client/panier.php'; // Afficher le panier
         break;
@@ -70,35 +105,8 @@ switch ($action) {
             header('Location: client.php?action=loginForm');
             exit();
         }
-        $client = $clientModel->getClientById($_SESSION['client_id']);
-        if (!$client) {
-            echo "Client non trouvé.";
-            exit();
-        }
-        $commandes = $clientModel->getClientOrders($_SESSION['client_id']);
-        if (!$commandes) {
-            echo "Aucune commande trouvée.";
-            exit();
-        }
-        
-        // Récupérer les détails de chaque commande
-        foreach ($commandes as &$commande) {
-            $commande['details'] = $commandeModel->getCommandeDetails($commande['id']);
-            // Vérifiez que les détails sont bien un tableau
-            if (!is_array($commande['details'])) {
-                echo "Détails de la commande non trouvés.";
-                exit();
-            }
-            // Calculer le total HT et TTC
-            $totalHt = 0;
-            foreach ($commande['details'] as $detail) {
-                $totalHt += $detail['prix_public'] * $detail['quantite'];
-            }
-            $commande['total_ht'] = $totalHt;
-            $commande['total_ttc'] = $totalHt * 1.2; // Exemple avec TVA de 20%
-        }
-        
-        require __DIR__ . '/../Views/client/espaceClient.php';
+        $clientId = $_SESSION['client_id']; // Récupérez l'ID du client depuis la session
+        $clientController->afficherEspaceClient($clientId); // Appelez la méthode pour afficher l'espace client
         break;
     case 'validerPanier':
         if (!isset($_SESSION['client_id'])) {
@@ -153,6 +161,28 @@ switch ($action) {
         } else {
             echo "Identifiants invalides.";
         }
+        break;
+    case 'afficherClients':
+        $clients = $clientModel->getAllClients(); // Supposons que vous avez une méthode pour obtenir tous les clients
+        echo '<h1>Liste des Clients</h1>';
+        echo '<p>Le code d\'affichage des clients est atteint.</p>'; // Message de débogage
+        echo '<table border="1">';
+        echo '<tr><th>Nom</th><th>Prénom</th><th>Email</th><th>Téléphone</th><th>Adresse</th></tr>';
+        
+        foreach ($clients as $client) {
+            echo '<tr>';
+            echo '<td>' . htmlspecialchars($client['nom']) . '</td>';
+            echo '<td>' . htmlspecialchars($client['prenom']) . '</td>';
+            echo '<td>' . htmlspecialchars($client['email']) . '</td>';
+            echo '<td>' . htmlspecialchars($client['telephone']) . '</td>';
+            echo '<td>' . htmlspecialchars($client['adresse']) . '</td>';
+            echo '</tr>';
+        }
+        
+        echo '</table>';
+        break;
+    case 'accueil':
+        require __DIR__ . '/../Views/client/accueil.php'; // Assurez-vous que ce fichier existe
         break;
     default:
         $produitController->afficherProduits();
