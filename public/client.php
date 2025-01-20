@@ -148,8 +148,9 @@ switch ($action) {
                 }
             }
 
+            // Afficher un message de succès
             echo "Commande validée avec succès !";
-            unset($_SESSION['panier']);
+            unset($_SESSION['panier']); // Vider le panier après validation
         } else {
             echo "Votre panier est vide.";
         }
