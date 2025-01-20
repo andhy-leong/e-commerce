@@ -5,6 +5,7 @@
     <title>Ajouter un administrateur</title>
 </head>
 <body>
+    <h1>Ajouter un Administrateur</h1>
     <form action="admin.php?action=ajouterAdmin" method="post">
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" name="username" required>

@@ -67,27 +67,20 @@ class Commande {
     }
 
     public function addCommandeProduit($commandeId, $produitId, $quantite, $montant) {
-        // Vérifier la disponibilité du stock avant d'ajouter la commande produit
-        $produitModel = new Produit($this->db);
-        $produit = $produitModel->getProduitById($produitId);
+        // Ajoutez la commande produit
+        $query = $this->db->prepare("INSERT INTO commande_produits (commande_id, produit_id, quantite, montant) VALUES (:commande_id, :produit_id, :quantite, :montant)");
+        $query->execute([
+            'commande_id' => $commandeId,
+            'produit_id' => $produitId,
+            'quantite' => $quantite,
+            'montant' => $montant
+        ]);
 
-        if ($produit['quantite_stock'] >= $quantite) {
-            // Ajoutez la commande produit
-            $query = $this->db->prepare("INSERT INTO commande_produits (commande_id, produit_id, quantite, montant) VALUES (:commande_id, :produit_id, :quantite, :montant)");
-            $query->execute([
-                'commande_id' => $commandeId,
-                'produit_id' => $produitId,
-                'quantite' => $quantite,
-                'montant' => $montant
-            ]);
+        // Mettre à jour le stock du produit
+        $produitModel = new Produit($this->db); // Assurez-vous d'importer le modèle Produit
+        $produitModel->updateStock($produitId, $quantite); // Soustraire la quantité du stock
 
-            // Mettre à jour le stock du produit
-            $produitModel->updateStock($produitId, $quantite);
-
-            return $query->rowCount(); // Retourner le nombre de lignes affectées
-        } else {
-            throw new Exception("Quantité demandée non disponible en stock.");
-        }
+        return $query->rowCount(); // Retourner le nombre de lignes affectées
     }
 
     public function getClientInfo($clientId) {
@@ -115,6 +108,18 @@ class Commande {
     public function deleteCommandeProduits($commandeId) {
         $query = $this->db->prepare("DELETE FROM commande_produits WHERE commande_id = :commande_id");
         return $query->execute(['commande_id' => $commandeId]);
+    }
+
+    public function getCommandeById($commandeId) {
+        $query = $this->db->prepare("SELECT * FROM commandes WHERE id = :commande_id");
+        $query->execute(['commande_id' => $commandeId]);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getClientOrders($clientId) {
+        $query = $this->db->prepare("SELECT * FROM commandes WHERE client_id = :client_id");
+        $query->execute(['client_id' => $clientId]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

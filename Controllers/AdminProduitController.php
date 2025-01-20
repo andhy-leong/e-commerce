@@ -34,7 +34,7 @@ class AdminProduitController {
             echo "Erreur lors de la suppression du produit.";
         }
     }
-
+    
     public function modifierQuantite() {
         $produitId = $_POST['id'] ?? null;
         $quantite = $_POST['quantite'] ?? 0;
@@ -54,6 +54,16 @@ class AdminProduitController {
         } else {
             echo "Erreur : ID de produit ou quantité invalide.";
         }
+    }
+    
+    public function modifierProduit($produitId, $data) {
+        if ($this->produitModel->updateProduit($produitId, $data)) {
+            $_SESSION['success_message'] = "Produit mis à jour avec succès.";
+        } else {
+            $_SESSION['error_message'] = "Erreur lors de la mise à jour du produit.";
+        }
+        header('Location: admin.php?action=afficherProduits');
+        exit();
     }
 }
 ?>

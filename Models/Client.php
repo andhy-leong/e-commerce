@@ -8,7 +8,7 @@ class Client {
     }
 
     public function getAllClients() {
-        $query = $this->db->query("SELECT * FROM clients");
+        $query = $this->db->query("SELECT * FROM clients ORDER BY id ASC");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -63,6 +63,16 @@ class Client {
             'adresse' => $data['adresse'],
             'id' => $clientId
         ]);
+    }
+
+    public function updateClientPassword($clientId, $ancienMotDePasse, $nouveauMotDePasse) {
+        $client = $this->getClientById($clientId);
+        if ($client && password_verify($ancienMotDePasse, $client['mot_de_passe'])) {
+            $hashedPassword = password_hash($nouveauMotDePasse, PASSWORD_DEFAULT);
+            $query = $this->db->prepare("UPDATE clients SET mot_de_passe = :mot_de_passe WHERE id = :id");
+            return $query->execute(['mot_de_passe' => $hashedPassword, 'id' => $clientId]);
+        }
+        return false;
     }
 
     // Autres méthodes...

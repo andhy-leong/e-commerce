@@ -82,6 +82,9 @@ switch ($action) {
                 $_SESSION['panier'][$produitId] = $quantite; // Ajoutez le produit
             }
 
+            // Calculez le nombre total de produits dans le panier
+            $_SESSION['panier_count'] = array_sum($_SESSION['panier']);
+
             // Stockez le message de succès dans la session
             $_SESSION['message'] = "Produit ajouté au panier avec succès !";
         } else {
@@ -187,6 +190,35 @@ switch ($action) {
         break;
     case 'accueil':
         require __DIR__ . '/../Views/client/accueil.php'; // Assurez-vous que ce fichier existe
+        break;
+    case 'afficherDetailsCommande':
+        $commandeId = $_GET['id'] ?? null;
+        if ($commandeId) {
+            $details = $commandeModel->getCommandeDetails($commandeId);
+            $commande = $commandeModel->getCommandeById($commandeId);
+            $clientInfo = $commandeModel->getClientInfo($_SESSION['client_id']);
+            require __DIR__ . '/../Views/client/detailsCommande.php';
+        } else {
+            echo "Commande non trouvée.";
+        }
+        break;
+    case 'modifierInfos':
+        if (!isset($_SESSION['client_id'])) {
+            header('Location: client.php?action=loginForm');
+            exit();
+        }
+        $clientId = $_SESSION['client_id'];
+        $clientController->modifierInfos($clientId, $_POST);
+        break;
+    case 'modifierMotDePasse':
+        if (!isset($_SESSION['client_id'])) {
+            header('Location: client.php?action=loginForm');
+            exit();
+        }
+        $clientId = $_SESSION['client_id'];
+        $ancienMotDePasse = $_POST['ancienMotDePasse'] ?? '';
+        $nouveauMotDePasse = $_POST['nouveauMotDePasse'] ?? '';
+        $clientController->modifierMotDePasse($clientId, $ancienMotDePasse, $nouveauMotDePasse);
         break;
     default:
         $produitController->afficherProduits();

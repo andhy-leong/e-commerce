@@ -34,14 +34,16 @@ if ($action === 'login') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    // Logique d'authentification mise à jour
-    if ($username === 'andhy' && $password === 'admin') {
+    $admin = $adminController->getAdminByUsername($username);
+    
+    if ($admin && password_verify($password, $admin['password'])) {
         $_SESSION['logged_in'] = true;
+        $_SESSION['admin_id'] = $admin['id'];
         header('Location: admin.php');
         exit();
     } else {
-        echo "Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer dans 2 secondes.";
-        header('Refresh: 2; URL=admin.php?action=loginForm');
+        $_SESSION['error_message'] = "Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer";
+        header('Location: admin.php?action=loginForm');
         exit();
     }
 }
@@ -92,7 +94,14 @@ switch ($action) {
         require __DIR__ . '/../Views/admin/ajouterAdmin.php';
         break;
     case 'ajouterAdmin':
-        $adminController->ajouterAdmin($_POST['username'], $_POST['password']);
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+        if (!empty($username) && !empty($password)) {
+            $adminController->ajouterAdmin($username, $password);
+        } else {
+            echo "Tous les champs sont requis.";
+        }
         break;
     case 'logout':
         session_unset();     // Supprimer les variables de session
@@ -112,6 +121,38 @@ switch ($action) {
         $commandeId = $_GET['id'] ?? null;
         if ($commandeId) {
             $commandeController->afficherDetailsCommande($commandeId);
+        }
+        break;
+    case 'modifierAdmin':
+        $adminId = $_POST['id'] ?? null;
+        $username = $_POST['username'] ?? '';
+        $newPassword = $_POST['new_password'] ?? '';
+
+        if ($adminId && !empty($username) && !empty($newPassword)) {
+            $adminController->modifierAdmin($adminId, $username, $newPassword);
+        } else {
+            echo "Tous les champs sont requis.";
+        }
+        break;
+    case 'modifierProduit':
+        $produitId = $_POST['id'] ?? null;
+        $data = [
+            'reference' => $_POST['reference'] ?? '',
+            'taille' => $_POST['taille'] ?? '',
+            'couleur' => $_POST['couleur'] ?? '',
+            'prix_public' => $_POST['prix_public'] ?? '',
+            'prix_achat' => $_POST['prix_achat'] ?? '',
+            'titre' => $_POST['titre'] ?? '',
+            'descriptif' => $_POST['descriptif'] ?? '',
+            'quantite_stock' => $_POST['quantite_stock'] ?? '',
+            'image' => $_POST['image'] ?? '',
+            'provenance' => $_POST['provenance'] ?? ''
+        ];
+
+        if ($produitId) {
+            $produitController->modifierProduit($produitId, $data);
+        } else {
+            echo "Erreur : ID de produit non spécifié.";
         }
         break;
     default:

@@ -33,9 +33,6 @@
         <label for="image">Image (URL) :</label>
         <input type="text" id="image" name="image">
         <br>
-        <label for="icone">Icône (URL) :</label>
-        <input type="text" id="icone" name="icone">
-        <br>
         <label for="provenance">Provenance :</label>
         <input type="text" id="provenance" name="provenance" required>
         <br>

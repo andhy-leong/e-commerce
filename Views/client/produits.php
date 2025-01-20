@@ -28,13 +28,28 @@
         </div>
         
     </header>
-    <h1>Liste des Produits</h1>
 
     
     <?php if (isset($_SESSION['message'])): ?>
         <p style="color: green;"><?= htmlspecialchars($_SESSION['message']) ?></p>
         <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
+
+    <div class="image-grid">
+            <div>
+                <img src="../Ressources/vangovango_accueil1.jpg" width="100%" height="250px" alt="Image d'accueil">
+            </div>
+            <div>
+                <img src="../Ressources/vangovango_accueil2.jpg" width="100%" height="250px" alt="Image d'accueil">
+            </div>
+            <div>
+            <img src="../Ressources/vangovango_accueil3.jpg" width="100%" height="250px" alt="Image d'accueil">
+            </div>
+            <div class="descriptif_accueil">
+                <p>Le Vangovango est un bracelet traditionnel originaire de Madagascar, célèbre pour sa beauté et son artisanat.</p>
+                <p>Chaque pièce est unique, travaillée avec soin à partir de matériaux nobles, offrant une qualité exceptionnelle et un design intemporel. Que vous cherchiez à ajouter une touche d'élégance à votre tenue quotidienne ou à offrir un cadeau chargé de signification, le Vangovango est le choix parfait. Sa fabrication respecte des standards stricts, garantissant non seulement un bijou de haute qualité, mais aussi un engagement envers l'environnement. </p>
+            </div>
+    </div>
 
 
     <form method="get" action="client.php">
@@ -45,314 +60,31 @@
             <option value="nom_desc">Nom (Z-A)</option>
             <option value="prix_asc">Prix (croissant)</option>
             <option value="prix_desc">Prix (décroissant)</option>
-            <option value="mieux_notes">Mieux notés</option>
         </select>
         <button type="submit">Trier</button>
     </form>
     <table>
-        <thead>
-            <tr>
-                <th>Référence</th>
-                <th>Titre</th>
-                <th>Descriptif</th>
-                <th>Image</th>
-                <th>Provenance</th>
-                <th>Taille</th>
-                <th>Couleur</th>
-                <th>Prix</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
         <div>
         <tbody>
             <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango1_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
+                <div class="produit">
+                    <img src="<?= htmlspecialchars($produit['image']) ?>" alt="<?= htmlspecialchars($produit['titre']) ?>" style="width:350px; height:350px;">
+                    <h2><?= htmlspecialchars($produit['titre']) ?></h2>
+                    <p>Référence: <?= htmlspecialchars($produit['reference']) ?></p>
+                    <p><?= htmlspecialchars($produit['descriptif']) ?></p>
+                    <p><?= htmlspecialchars($produit['provenance']) ?></p>
+                    <p>Taille: <?= htmlspecialchars($produit['taille']) ?></p>
+                    <p>Matériaux: <?= htmlspecialchars($produit['couleur']) ?></p>
+                    <p>Prix: <?= htmlspecialchars($produit['prix_public']) ?> €</p>
+                        <form method="post" action="client.php?action=ajouterAuPanier">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
+                            <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
                         </form>
-                    </td>
-                </tr>
+                </div>
             <?php endforeach; ?>
         </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango2_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango3_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango4_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango5_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango6_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango7_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango8_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango9_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango10_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango11_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango12_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div>
-        <?php foreach ($produits as $produit): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produit['reference'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['titre'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['descriptif'] ?? '') ?></td>
-                    <td><img src="../Ressources/Vangovango/vangovango13_1.png" alt="Image du produit" style="width:50px;height:50px;"></td>
-                    <td><?= htmlspecialchars($produit['provenance'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['couleur'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($produit['prix_public'] ?? '') ?> €</td>
-                    <td>
-                        <form action="client.php?action=ajouterAuPanier" method="post">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant']) ?>">
-                            <input type="number" name="quantite" min="1" max="<?= htmlspecialchars($produit['quantite_stock']) ?>" value="1" required>
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-        </div>
-        <div class="vangovango">
-            <div></div>
-
         </div>
     </table>
 </body>
+</html>

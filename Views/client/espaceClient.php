@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <title>Espace Client</title>
     <style>
-        /* Ajoutez vos styles ici */
+        .message {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
     </style>
 </head>
 <body>
-    <h1>Bienvenue dans votre espace client</h1>
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="message success"><?= htmlspecialchars($_SESSION['success_message']) ?></div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="message error"><?= htmlspecialchars($_SESSION['error_message']) ?></div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
 
-    <a href="client.php?action=logout">Déconnexion</a>
+    <h1>Bienvenue, <?= htmlspecialchars($client['prenom']) ?> <?= htmlspecialchars($client['nom']) ?></h1>
+    
+
 
     <h2>Vos informations personnelles</h2>
     <form method="post" action="client.php?action=modifierInfos">
@@ -43,6 +64,34 @@
         <button type="submit">Changer le mot de passe</button>
     </form>
 
+    <h2>Vos Commandes</h2>
+    <?php if (!empty($commandes)): ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro de Commande</th>
+                    <th>Date</th>
+                    <th>Montant Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($commandes as $commande): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($commande['numero_commande']) ?></td>
+                        <td><?= htmlspecialchars($commande['date']) ?></td>
+                        <td><?= htmlspecialchars($commande['total_ttc']) ?> €</td>
+                        <td>
+                            <a href="client.php?action=afficherDetailsCommande&id=<?= htmlspecialchars($commande['id']) ?>">Voir Détails</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>Vous n'avez pas encore passé de commande.</p>
+    <?php endif; ?>
 
+    <a href="client.php?action=logout">Déconnexion</a>
 </body>
 </html>

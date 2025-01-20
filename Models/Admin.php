@@ -18,9 +18,9 @@ class Admin {
         return $query->execute(['password' => password_hash($newPassword, PASSWORD_DEFAULT), 'id' => $id]);
     }
 
-    public function addAdmin($username, $password) {
+    public function addAdmin($username, $hashedPassword) {
         $query = $this->db->prepare("INSERT INTO admins (username, password) VALUES (:username, :password)");
-        return $query->execute(['username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT)]);
+        return $query->execute(['username' => $username, 'password' => $hashedPassword]);
     }
 
     public function getAllAdmins() {
@@ -31,6 +31,11 @@ class Admin {
     public function deleteAdmin($id) {
         $query = $this->db->prepare("DELETE FROM admins WHERE id = :id");
         return $query->execute(['id' => $id]);
+    }
+
+    public function updateAdmin($id, $username, $hashedPassword) {
+        $query = $this->db->prepare("UPDATE admins SET username = :username, password = :password WHERE id = :id");
+        return $query->execute(['username' => $username, 'password' => $hashedPassword, 'id' => $id]);
     }
 }
 ?> 

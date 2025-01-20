@@ -10,8 +10,7 @@
         <li><a href="admin.php?action=afficherClients">Gérer les clients</a></li>
         <li><a href="admin.php?action=afficherProduits">Gérer les produits</a></li>
         <li><a href="admin.php?action=afficherAdmins">Gérer les administrateurs</a></li>
-        <li><a href="admin.php?action=afficherCommandes">Gérer les commandes</a></li> <!-- Lien ajouté -->
-        <li><a href="admin.php?action=afficherFournisseurs">Fournisseurs</a></li>
+        <li><a href="admin.php?action=afficherCommandes">Gérer les commandes</a></li> 
         <li><a href="admin.php?action=logout">Déconnexion</a></li>
     </ul>
 </body>

@@ -19,24 +19,23 @@ class ClientController {
     }
 
     public function modifierInfos($clientId, $data) {
-        echo '<pre>';
-        print_r($data); // Affichez les données reçues
-        echo '</pre>';
-        
         if ($this->clientModel->updateClientInfo($clientId, $data)) {
-            header('Location: client.php?action=espaceClient');
-            exit();
+            $_SESSION['success_message'] = "Vos informations personnelles ont été mises à jour avec succès.";
         } else {
-            echo "Erreur lors de la mise à jour des informations.";
+            $_SESSION['error_message'] = "Erreur lors de la mise à jour des informations.";
         }
+        header('Location: client.php?action=espaceClient');
+        exit();
     }
 
     public function modifierMotDePasse($clientId, $ancienMotDePasse, $nouveauMotDePasse) {
         if ($this->clientModel->updateClientPassword($clientId, $ancienMotDePasse, $nouveauMotDePasse)) {
-            echo "Mot de passe mis à jour avec succès.";
+            $_SESSION['success_message'] = "Mot de passe mis à jour avec succès.";
         } else {
-            echo "Erreur lors de la mise à jour du mot de passe.";
+            $_SESSION['error_message'] = "Erreur lors de la mise à jour du mot de passe.";
         }
+        header('Location: client.php?action=espaceClient');
+        exit();
     }
 
     public function login($email, $motDePasse) {

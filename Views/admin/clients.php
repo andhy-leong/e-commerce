@@ -46,19 +46,11 @@
                     <td>
                         <?php if (!empty($client['commandes'])): ?>
                             <ul>
-                                <?php 
-                                $commandesAffichees = []; // Tableau pour suivre les commandes affichées
-                                foreach ($client['commandes'] as $commande): 
-                                    if (!in_array($commande['numero_commande'], $commandesAffichees)): // Vérifiez si la commande a déjà été affichée
-                                        $commandesAffichees[] = $commande['numero_commande']; // Ajoutez à la liste des affichées
-                                ?>
+                                <?php foreach ($client['commandes'] as $commande): ?>
                                     <li>
-                                        Commande #<?= htmlspecialchars($commande['numero_commande']) ?> - Date: <?= htmlspecialchars($commande['date']) ?> - Montant: <?= htmlspecialchars($commande['montant']) ?> €
+                                        Commande #<?= htmlspecialchars($commande['numero_commande']) ?> - Date: <?= htmlspecialchars($commande['date']) ?> - Montant: <?= htmlspecialchars($commande['total_ttc']) ?> €
                                     </li>
-                                <?php 
-                                    endif; 
-                                endforeach; 
-                                ?>
+                                <?php endforeach; ?>
                             </ul>
                         <?php else: ?>
                             Aucune commande passée.

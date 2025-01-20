@@ -42,7 +42,6 @@ class Produit {
             'descriptif' => $data['descriptif'],
             'quantite_stock' => $data['quantite_stock'],
             'image' => $data['image'],
-            'icone' => $data['icone'],
             'provenance' => $data['provenance']
         ]);
     }
@@ -77,7 +76,22 @@ class Produit {
         }
     }
 
+    public function updateProduit($id, $data) {
+        $query = $this->db->prepare("UPDATE produits SET reference = :reference, taille = :taille, couleur = :couleur, prix_public = :prix_public, prix_achat = :prix_achat, titre = :titre, descriptif = :descriptif, quantite_stock = :quantite_stock, image = :image, provenance = :provenance WHERE identifiant = :id");
+        return $query->execute([
+            'reference' => $data['reference'],
+            'taille' => $data['taille'],
+            'couleur' => $data['couleur'],
+            'prix_public' => $data['prix_public'],
+            'prix_achat' => $data['prix_achat'],
+            'titre' => $data['titre'],
+            'descriptif' => $data['descriptif'],
+            'quantite_stock' => $data['quantite_stock'],
+            'image' => $data['image'],
+            'provenance' => $data['provenance'],
+            'id' => $id
+        ]);
     }
-    
+}
 
 ?>
