@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Mon Panier</title>
+    <style>
+        .message {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #155724;
+            background-color: #d4edda; /* Couleur de fond verte */
+        }
+    </style>
 </head>
 <body>
     <h1>Mon Panier</h1>
+
+    <?php if (isset($_SESSION['confirmation_message'])): ?>
+        <div class="message"><?= htmlspecialchars($_SESSION['confirmation_message']) ?></div>
+        <?php unset($_SESSION['confirmation_message']); // Supprimer le message après l'affichage ?>
+    <?php endif; ?>
 
     <?php if (empty($_SESSION['panier'])): ?>
         <p>Votre panier est vide.</p>

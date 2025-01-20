@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . '/mail.php';
 
 class Commande {
     private $db;
@@ -59,9 +58,6 @@ class Commande {
         // Récupérer les informations du client pour l'e-mail
         $clientInfo = $this->getClientInfo($clientId);
         $orderDetails = "Numéro de commande: $numeroCommande<br>Montant total: $totalTtc €"; // Ajoutez d'autres détails si nécessaire
-
-        // Envoyer l'e-mail de confirmation
-        sendOrderConfirmation($clientInfo['email'], $clientInfo['prenom'], $orderDetails);
 
         return $commandeId;
     }

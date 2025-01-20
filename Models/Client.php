@@ -12,16 +12,15 @@ class Client {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function emailExists($email) {
+        $query = $this->db->prepare("SELECT COUNT(*) FROM clients WHERE email = :email");
+        $query->execute(['email' => $email]);
+        return $query->fetchColumn() > 0;
+    }
+
     public function addClient($data) {
         $query = $this->db->prepare("INSERT INTO clients (nom, prenom, email, mot_de_passe, telephone, adresse) VALUES (:nom, :prenom, :email, :mot_de_passe, :telephone, :adresse)");
-        return $query->execute([
-            'nom' => $data['nom'],
-            'prenom' => $data['prenom'],
-            'email' => $data['email'],
-            'mot_de_passe' => password_hash($data['mot_de_passe'], PASSWORD_DEFAULT),
-            'telephone' => $data['telephone'],
-            'adresse' => $data['adresse']
-        ]);
+        return $query->execute($data);
     }
 
     public function deleteClient($id) {
@@ -45,12 +44,6 @@ class Client {
         $query = $this->db->prepare("SELECT * FROM clients WHERE email = :email");
         $query->execute(['email' => $email]);
         return $query->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function emailExists($email) {
-        $query = $this->db->prepare("SELECT COUNT(*) FROM clients WHERE email = :email");
-        $query->execute(['email' => $email]);
-        return $query->fetchColumn() > 0; // Retourne true si l'e-mail existe
     }
 
     public function updateClientInfo($clientId, $data) {

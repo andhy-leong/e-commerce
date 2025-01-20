@@ -148,9 +148,13 @@ switch ($action) {
                 }
             }
 
-            // Afficher un message de succès
-            echo "Commande validée avec succès !";
+            // Récupérer les informations du client pour le message
+            $clientInfo = $clientModel->getClientById($clientId);
+            $_SESSION['confirmation_message'] = "Merci " . htmlspecialchars($clientInfo['prenom']) . " " . htmlspecialchars($clientInfo['nom']) . ", votre commande a été validée avec succès !";
+
             unset($_SESSION['panier']); // Vider le panier après validation
+            header('Location: client.php?action=afficherPanier'); // Rediriger vers la page du panier
+            exit();
         } else {
             echo "Votre panier est vide.";
         }
