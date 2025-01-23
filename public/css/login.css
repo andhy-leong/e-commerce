@@ -48,6 +48,8 @@ input[type="email"] {
 
 input[type="password"] {
     padding-right: 30px; /* Ajoute de l'espace pour l'icône */
+    width: calc(100% - 30px); /* Assurez-vous que le champ de mot de passe garde sa taille */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
 button {

@@ -6,21 +6,7 @@
     <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="../public/css/login.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-    function togglePasswordVisibility() {
-        var passwordInput = document.getElementById("password");
-        var toggleButton = document.getElementById("togglePassword");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            toggleButton.classList.remove("fa-eye-slash"); // Icône barrée
-            toggleButton.classList.add("fa-eye"); // Icône normale
-        } else {
-            passwordInput.type = "password";
-            toggleButton.classList.remove("fa-eye"); // Icône normale
-            toggleButton.classList.add("fa-eye-slash"); // Icône barrée
-        }
-    }
-</script>
+    <script src="../public/js/passwordShow.js"></script>
 </head>
 <body>
 <header>
@@ -42,7 +28,7 @@
         <label for="password">Mot de passe :</label>
         <div style="position: relative;">
             <input type="password" id="password" name="password" required>
-            <i class="fas fa-eye-slash" id="togglePassword" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+            <i class="fas fa-eye-slash" id="togglePassword" onclick="togglePasswordVisibility('password', 'togglePassword')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
         <br>
         <button type="submit">Se connecter</button>
