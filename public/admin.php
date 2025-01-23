@@ -22,11 +22,13 @@ require_once __DIR__ . '/../Controllers/AdminClientController.php';
 require_once __DIR__ . '/../Controllers/AdminProduitController.php';
 require_once __DIR__ . '/../Controllers/AdminController.php';
 require_once __DIR__ . '/../Controllers/AdminCommandeController.php'; // Ajout du contrôleur des commandes
+require_once __DIR__ . '/../Controllers/AdminFournisseurController.php'; // Ajout du contrôleur des fournisseurs
 
 $clientController = new AdminClientController();
 $produitController = new AdminProduitController();
 $adminController = new AdminController();
 $commandeController = new AdminCommandeController(); // Instanciation du contrôleur des commandes
+$fournisseurController = new AdminFournisseurController(); // Instanciation du contrôleur des fournisseurs
 
 $action = $_GET['action'] ?? '';
 
@@ -157,6 +159,24 @@ switch ($action) {
         break;
     case 'afficherBenefices':
         $produitController->afficherBenefices();
+        break;
+    case 'afficherFournisseurs':
+        $fournisseurController->afficherFournisseurs();
+        break;
+    case 'ajouterFournisseurForm':
+        require __DIR__ . '/../Views/admin/ajouterFournisseur.php';
+        break;
+    case 'ajouterFournisseur':
+        $fournisseurController->ajouterFournisseur($_POST);
+        break;
+    case 'supprimerFournisseur':
+        $fournisseurController->supprimerFournisseur($_GET['id']);
+        break;
+    case 'modifierFournisseurForm':
+        $fournisseurController->modifierFournisseurForm($_GET['id']);
+        break;
+    case 'modifierFournisseur':
+        $fournisseurController->modifierFournisseur($_GET['id'], $_POST);
         break;
     default:
         require __DIR__ . '/../Views/admin/dashboard.php';

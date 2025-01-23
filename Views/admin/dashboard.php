@@ -23,6 +23,7 @@
         <a href="admin.php?action=afficherAdmins">Gérer les administrateurs</a>
         <a href="admin.php?action=afficherCommandes">Gérer les commandes</a>
         <a href="admin.php?action=afficherBenefices">Comptabilité</a>
+        <a href="admin.php?action=afficherFournisseurs">Gérer les fournisseurs</a>
         <a href="client.php?action=afficherProduits">Retour à la pages d'accueil des clients</a>
         <a href="admin.php?action=logout">Déconnexion</a>
     </nav>
