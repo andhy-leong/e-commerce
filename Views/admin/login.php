@@ -32,6 +32,14 @@
         </div>
         <br>
         <button type="submit">Se connecter</button>
+        <br>
+        
     </form>
+    <p class="center-text">
+        Vous n'avez pas de compte administrateur? 
+        <a href="client.php?action=afficherProduits">Retour à la page d'accueil des clients</a>
+    </p>
+    <p>
+
 </body>
 </html> 
