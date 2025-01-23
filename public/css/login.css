@@ -46,6 +46,10 @@ input[type="email"] {
     margin-right: 10px; /* Ajoute un espace à droite */
 }
 
+input[type="password"] {
+    padding-right: 30px; /* Ajoute de l'espace pour l'icône */
+}
+
 button {
     background-color: #963B38; /* Couleur de fond du bouton */
     color: white; /* Couleur du texte du bouton */

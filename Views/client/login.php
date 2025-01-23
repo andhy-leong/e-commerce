@@ -5,6 +5,22 @@
     <title>Connexion Client</title>
     <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="../public/css/login.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("mot_de_passe");
+            var toggleButton = document.getElementById("togglePassword");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.classList.remove("fa-eye-slash"); // Icône barrée
+                toggleButton.classList.add("fa-eye"); // Icône normale
+            } else {
+                passwordInput.type = "password";
+                toggleButton.classList.remove("fa-eye"); // Icône normale
+                toggleButton.classList.add("fa-eye-slash"); // Icône barrée
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -24,7 +40,10 @@
         <input type="email" id="email" name="email" required>
         <br>
         <label for="mot_de_passe">Mot de passe :</label>
-        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+        <div style="position: relative;">
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+            <i class="fas fa-eye-slash" id="togglePassword" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+        </div>
         <br>
         <button type="submit">Se connecter</button>
     </form>
