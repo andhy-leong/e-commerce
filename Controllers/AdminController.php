@@ -48,5 +48,19 @@ class AdminController {
         header('Location: admin.php?action=afficherAdmins');
         exit();
     }
+
+    public function afficherDashboard() {
+        // Logique pour afficher le tableau de bord
+        require __DIR__ . '/../Views/admin/dashboard.php';
+    }
+
+    public function afficherClients() {
+        $clients = $this->clientModel->getAllClients(); // Récupérer tous les clients
+        foreach ($clients as &$client) {
+            $client['commandes'] = $this->commandeModel->getCommandesByClientId($client['id']); // Récupérer toutes les commandes pour chaque client
+        }
+        var_dump($clients); // Ajoutez ceci pour voir les données
+        require __DIR__ . '/../Views/admin/clients.php'; // Afficher la vue
+    }
 }
 ?> 

@@ -3,8 +3,17 @@
    <head>
        <meta charset="UTF-8">
        <title>Ajouter un client</title>
+       <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/login.css"/>
    </head>
    <body>
+   <header>
+        <div>
+            <a href="admin.php?action=afficherDashboard">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
        <form action="admin.php?action=ajouterClient" method="post">
            <label for="nom">Nom :</label>
            <input type="text" id="nom" name="nom" required>

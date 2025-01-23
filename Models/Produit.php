@@ -31,7 +31,7 @@ class Produit {
     }
 
     public function addProduit($data) {
-        $query = $this->db->prepare("INSERT INTO produits (reference, taille, couleur, prix_public, prix_achat, titre, descriptif, quantite_stock, image, icone, provenance) VALUES (:reference, :taille, :couleur, :prix_public, :prix_achat, :titre, :descriptif, :quantite_stock, :image, :icone, :provenance)");
+        $query = $this->db->prepare("INSERT INTO produits (reference, taille, couleur, prix_public, prix_achat, titre, descriptif, quantite_stock, image, provenance) VALUES (:reference, :taille, :couleur, :prix_public, :prix_achat, :titre, :descriptif, :quantite_stock, :image, :provenance)");
         return $query->execute([
             'reference' => $data['reference'],
             'taille' => $data['taille'],
@@ -52,10 +52,11 @@ class Produit {
     }
 
     public function getProduitById($id) {
-        // Assurez-vous que la colonne 'quantite_stock' est bien sélectionnée
-        $query = $this->db->prepare("SELECT quantite_stock, reference, titre, prix_public FROM produits WHERE identifiant = :id");
-        $query->execute(['id' => $id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM produits WHERE identifiant = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne les détails du produit
     }
 
     public function updateStock($produitId, $quantite) {

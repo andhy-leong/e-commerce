@@ -1,0 +1,17 @@
+header {
+    display:flex;
+    align-items: center; 
+    justify-content: center; 
+    background-color: #963B38; 
+    padding-top: 5px;
+}
+
+
+header div img {
+    max-height: 100px;
+    
+}
+
+header img {
+    border: none;
+}

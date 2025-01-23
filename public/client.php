@@ -27,7 +27,6 @@ switch ($action) {
         require __DIR__ . '/../Views/client/register.php';
         break;
     case 'register':
-        var_dump($_POST);
         $nom = $_POST['nom'] ?? '';
         $prenom = $_POST['prenom'] ?? '';
         $email = $_POST['email'] ?? '';
@@ -50,6 +49,9 @@ switch ($action) {
             break;
         }
 
+        // Hachage du mot de passe
+        $hashedPassword = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+
         // Logique d'inscription (ajoutez votre code ici pour enregistrer le client)
         $clientModel->addClient([
             'nom' => $nom,
@@ -57,7 +59,7 @@ switch ($action) {
             'email' => $email,
             'telephone' => $telephone,
             'adresse' => "$numero_rue $nom_rue, $code_postal $ville", // Combinez les champs d'adresse
-            'mot_de_passe' => $mot_de_passe
+            'mot_de_passe' => $hashedPassword // Utilisez le mot de passe haché
         ]);
 
         header('Location: client.php?action=loginForm'); // Rediriger vers la page de connexion après l'inscription
@@ -96,8 +98,26 @@ switch ($action) {
         // Logique de modification de la quantité...
         break;
     case 'retirerDuPanier':
-        // Logique de retrait du panier...
-        break;
+        $produitId = $_POST['id'] ?? null;
+        $quantite = $_POST['quantite'] ?? 0; // Récupérer la quantité à retirer
+        if ($produitId && $quantite > 0) {
+            // Vérifiez si le produit est dans le panier
+            if (isset($_SESSION['panier'][$produitId])) {
+                if ($_SESSION['panier'][$produitId] > $quantite) {
+                    $_SESSION['panier'][$produitId] -= $quantite; // Réduire la quantité
+                    $_SESSION['message'] = "Quantité réduite du produit dans le panier avec succès !";
+                } elseif ($_SESSION['panier'][$produitId] == $quantite) {
+                    unset($_SESSION['panier'][$produitId]); // Retirer le produit si la quantité est égale
+                    $_SESSION['message'] = "Produit retiré du panier avec succès !";
+                } else {
+                    echo "Erreur : quantité à retirer supérieure à celle en stock.";
+                }
+            } else {
+                echo "Erreur : produit non trouvé dans le panier.";
+            }
+        }
+        header('Location: client.php?action=afficherPanier'); // Rediriger vers la page du panier
+        exit();
     case 'logout':
         session_unset();
         session_destroy();
@@ -225,6 +245,19 @@ switch ($action) {
         $nouveauMotDePasse = $_POST['nouveauMotDePasse'] ?? '';
         $clientController->modifierMotDePasse($clientId, $ancienMotDePasse, $nouveauMotDePasse);
         break;
+    case 'modifierAdmin':
+        $adminId = $_POST['id'] ?? null;
+        $username = $_POST['username'] ?? '';
+        $newPassword = $_POST['new_password'] ?? '';
+
+        if ($adminId && !empty($username) && !empty($newPassword)) {
+            $adminController->modifierAdmin($adminId, $username, $newPassword);
+            $_SESSION['message'] = "Les informations de l'administrateur ont été mises à jour avec succès."; // Message de succès
+        } else {
+            echo "Tous les champs sont requis.";
+        }
+        header('Location: admin.php?action=afficherAdmins'); // Rediriger vers la liste des administrateurs
+        exit();
     default:
         $produitController->afficherProduits();
         break;

@@ -3,59 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des produits</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        a, button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-        }
-        a:hover, button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/produitsAdmins.css"/>
 </head>
 <body>
+<header>
+    <div>
+        <a href="admin.php?action=afficherDashboard">
+            <img src="../Ressources/vangovibeslogo.png" alt="logo">
+        </a>
+    </div>
+</header>
+<h1>Liste des Produits</h1>
     <a href="admin.php?action=ajouterProduitForm">Ajouter un produit</a>
 
     <table>
         <thead>
             <tr>
-                <th>Référence</th>
-                <th>Taille</th>
-                <th>Couleur</th>
-                <th>Prix Public</th>
-                <th>Prix Achat</th>
-                <th>Titre</th>
-                <th>Descriptif</th>
-                <th>Quantité en Stock</th>
-                <th>Image</th>
-                <th>Provenance</th>
-                <th>Actions</th>
+                <th style="width: 10%;">Référence</th>
+                <th style="width: 10%;">Taille</th>
+                <th style="width: 10%;">Matériaux</th>
+                <th style="width: 10%;">Prix Public</th>
+                <th style="width: 10%;">Prix Achat</th>
+                <th style="width: 20%;">Titre</th>
+                <th style="width: 20%;">Descriptif</th>
+                <th style="width: 10%;">Quantité en Stock</th>
+                <th style="width: 10%;">Image</th>
+                <th style="width: 10%;">Provenance</th>
+                <th style="width: 10%;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -79,6 +54,13 @@
                         </td>
                     </form>
                 </tr>
+                <?php if ($produit['quantite_stock'] <= 10): ?>
+                    <tr>
+                        <td colspan="11" style="color: red; text-align: center;">
+                            Attention : Le stock de <?= htmlspecialchars($produit['titre']) ?> est faible (<?= htmlspecialchars($produit['quantite_stock']) ?> en stock) Pensez à réapprovisionner votre stock.
+                        </td>
+                    </tr>
+                <?php endif; ?>
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Espace Client</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/espaceClient.css"/>
     <style>
         .message {
             padding: 10px;
@@ -20,6 +22,13 @@
     </style>
 </head>
 <body>
+    <header>
+        <div>
+            <a href="client.php?action=afficherProduits">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <?php if (isset($_SESSION['success_message'])): ?>
         <div class="message success"><?= htmlspecialchars($_SESSION['success_message']) ?></div>
         <?php unset($_SESSION['success_message']); ?>

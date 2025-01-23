@@ -60,6 +60,18 @@ class ClientController {
         }
     }
 
+    public function afficherProduit() {
+        if (isset($_GET['id'])) {
+            $produitId = $_GET['id'];
+            $produit = $this->produitModel->getProduitById($produitId); // Assurez-vous d'avoir cette méthode dans votre modèle
+            require __DIR__ . '/../Views/client/produits.pdp.php'; // Afficher la vue des détails du produit
+        } else {
+            // Gérer le cas où l'ID du produit n'est pas fourni
+            header('Location: client.php?action=afficherProduits'); // Rediriger vers la liste des produits
+            exit();
+        }
+    }
+
 }
 ?>
 

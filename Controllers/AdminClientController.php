@@ -30,6 +30,10 @@ class AdminClientController {
                 echo "L'email existe déjà.";
                 return;
             }
+
+            // Hachage du mot de passe
+            $data['mot_de_passe'] = password_hash($data['mot_de_passe'], PASSWORD_DEFAULT);
+
             $this->clientModel->addClient($data);
             header('Location: admin.php?action=afficherClients');
             exit();

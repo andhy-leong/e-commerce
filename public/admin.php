@@ -155,6 +155,9 @@ switch ($action) {
             echo "Erreur : ID de produit non spécifié.";
         }
         break;
+    case 'afficherBenefices':
+        $produitController->afficherBenefices();
+        break;
     default:
         require __DIR__ . '/../Views/admin/dashboard.php';
         break;

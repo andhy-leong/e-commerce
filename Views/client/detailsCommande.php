@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Détails de la Commande</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/detailsCommande.css"/>
 </head>
 <body>
+    <header>
+        <div>
+            <a href="client.php?action=afficherProduits">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <h1>Détails de la Commande #<?= htmlspecialchars($commande['numero_commande']) ?></h1>
     
     <h2>Informations du Client</h2>
@@ -19,24 +28,22 @@
         <thead>
             <tr>
                 <th>Date</th>
+                <th>Titre</th>
+                <th>Quantité</th>
+                <th>Prix</th>
                 <th>Prix Total HT</th>
                 <th>Prix Total TTC</th>
-                <th>Titre</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Date de Commande</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($details as $article): ?>
                 <tr>
                     <td><?= htmlspecialchars($commande['date']) ?></td>
+                    <td><?= htmlspecialchars($article['titre']) ?></td>
+                    <td><?= htmlspecialchars($article['quantite']) ?></td>
+                    <td><?= htmlspecialchars($article['prix_public']) ?> €</td>
                     <td><?= htmlspecialchars($commande['total_ht']) ?> €</td>
                     <td><?= htmlspecialchars($commande['total_ttc']) ?> €</td>
-                    <td><?= htmlspecialchars($article['titre']) ?></td>
-                    <td><?= htmlspecialchars($article['prix_public']) ?> €</td>
-                    <td><?= htmlspecialchars($article['quantite']) ?></td>
-                    <td><?= htmlspecialchars($article['date']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

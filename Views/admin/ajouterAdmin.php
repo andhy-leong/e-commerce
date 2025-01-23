@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un administrateur</title>
+    <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
 </head>
 <body>
+<header>
+        <div>
+        <a href="admin.php?action=afficherDashboard">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <h1>Ajouter un Administrateur</h1>
     <form action="admin.php?action=ajouterAdmin" method="post">
         <label for="username">Nom d'utilisateur :</label>

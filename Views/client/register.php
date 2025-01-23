@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
+    <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css"  href="../public/css/login.css"/>
 </head>
 <body>
+    <header>
+        <div>
+            <a href="client.php?action=afficherProduits">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <h1>Inscription</h1>
     <form action="client.php?action=register" method="post">
         <label for="nom">Nom :</label>

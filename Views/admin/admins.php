@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des administrateurs</title>
-    <style>
-        .message {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/admins.css"/>
 </head>
 <body>
+<header>
+    <div>
+        <a href="admin.php?action=afficherDashboard">
+            <img src="../Ressources/vangovibeslogo.png" alt="logo">
+        </a>
+    </div>
+</header>
     <h1>Gestion des Administrateurs</h1>
     <a href="admin.php?action=ajouterAdminForm">Ajouter un administrateur</a>
+
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="message"><?= htmlspecialchars($_SESSION['message']) ?></div>
+        <?php unset($_SESSION['message']); // Supprimer le message après l'affichage ?>
+    <?php endif; ?>
+
     <table>
         <thead>
             <tr>

@@ -65,5 +65,10 @@ class AdminProduitController {
         header('Location: admin.php?action=afficherProduits');
         exit();
     }
+    
+    public function afficherBenefices() {
+        $produits = $this->produitModel->getAllProduits();
+        require __DIR__ . '/../Views/admin/comptabilite.php';
+    }
 }
 ?>

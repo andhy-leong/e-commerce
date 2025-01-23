@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion des Commandes</title>
+    <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
+<header>
+        <div>
+        <a href="admin.php?action=afficherDashboard">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <h1>Liste des Commandes</h1>
     <table>
         <thead>

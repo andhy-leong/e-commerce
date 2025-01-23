@@ -117,5 +117,13 @@ class Commande {
         $query->execute(['client_id' => $clientId]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getCommandesByClientId($clientId) {
+        $query = "SELECT * FROM commandes WHERE client_id = :client_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':client_id', $clientId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

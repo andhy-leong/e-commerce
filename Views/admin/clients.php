@@ -3,22 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion des Clients</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/adminClients.css"/>
 </head>
 <body>
+<header>
+        <div>
+        <a href="admin.php?action=afficherDashboard">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <h1>Liste des Clients</h1>
     <a href="admin.php?action=ajouterClientForm">Inscrire un client</a>
     <table>
@@ -30,7 +25,6 @@
                 <th>Email</th>
                 <th>Téléphone</th>
                 <th>Adresse</th>
-                <th>Commandes</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -44,20 +38,7 @@
                     <td><?= htmlspecialchars($client['telephone']) ?></td>
                     <td><?= htmlspecialchars($client['adresse']) ?></td>
                     <td>
-                        <?php if (!empty($client['commandes'])): ?>
-                            <ul>
-                                <?php foreach ($client['commandes'] as $commande): ?>
-                                    <li>
-                                        Commande #<?= htmlspecialchars($commande['numero_commande']) ?> - Date: <?= htmlspecialchars($commande['date']) ?> - Montant: <?= htmlspecialchars($commande['total_ttc']) ?> €
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php else: ?>
-                            Aucune commande passée.
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <a href="admin.php?action=supprimerClient&id=<?= $client['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?');">Supprimer</a>
+                        <a href="admin.php?action=supprimerClient&id=<?= $client['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?');">Supprimer le client</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

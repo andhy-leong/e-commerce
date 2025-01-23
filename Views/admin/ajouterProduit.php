@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un produit</title>
+    <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
 </head>
 <body>
+<header>
+        <div>
+        <a href="admin.php?action=afficherDashboard">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            </a>
+        </div>
+    </header>
     <form action="admin.php?action=ajouterProduit" method="post">
         <label for="reference">Référence :</label>
         <input type="text" id="reference" name="reference" required>
@@ -12,7 +20,7 @@
         <label for="taille">Taille :</label>
         <input type="text" id="taille" name="taille" required>
         <br>
-        <label for="couleur">Couleur :</label>
+        <label for="couleur">Matériaux :</label>
         <input type="text" id="couleur" name="couleur" required>
         <br>
         <label for="prix_public">Prix Public :</label>

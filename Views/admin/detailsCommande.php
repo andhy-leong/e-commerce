@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Détails de la Commande</title>
+    <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="../public/css/detailsCommande.css"/>
 </head>
 <body>
+<header>
+<div>
+            <a href="admin.php?action=afficherDashboard">
+                <img src="../Ressources/vangovibeslogo.png" alt="logo" style="border: none;">
+            </a>
+        </div>
+    </header>
     <h1>Détails de la Commande #<?= htmlspecialchars($details[0]['numero_commande']) ?></h1>
     <h2>Informations du Client</h2>
     <p>Nom: <?= htmlspecialchars($clientInfo['nom']) ?></p>
