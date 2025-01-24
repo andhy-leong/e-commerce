@@ -36,6 +36,9 @@
             <?php endif; ?>
             <a href="client.php?action=afficherPanier" class="panier"><img src="../Ressources/panierlogo.png" alt="Panier"><p>Panier</p></a>
         </div>
+        <div>
+            <button id="theme-toggle" style="padding: 8px 15px; background-color: #963B38; color: white; border: none; border-radius: 4px; cursor: pointer;">Thème Sombre</button>
+        </div>
     </nav>
 
     <?php if (isset($_SESSION['confirmation_message'])): ?>
@@ -186,5 +189,16 @@
         </footer>
 
     <script src="../public/js/accueil.js"></script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                themeToggle.textContent = 'Thème Clair';
+            } else {
+                themeToggle.textContent = 'Thème Sombre';
+            }
+        });
+    </script>
 </body>
 </html>

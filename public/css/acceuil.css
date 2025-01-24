@@ -9,6 +9,27 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body.dark-theme {
+    background-color: #121212; /* Couleur de fond sombre */
+    color: #ffffff; /* Couleur du texte clair */
+}
+
+body.dark-theme header {
+    background-color: #1e1e1e; /* Couleur d'arrière-plan de l'en-tête sombre */
+}
+
+body.dark-theme table {
+    background-color: #1e1e1e; /* Couleur de fond des tables */
+    color: #ffffff; /* Couleur du texte des tables */
+}
+
+body.dark-theme th {
+    background-color: #333333; /* Couleur de fond des en-têtes de table */
+}
+
+body.dark-theme a {
+    color: #bb86fc; /* Couleur des liens dans le thème sombre */
+}
 
 /* barre de navigation */
 
