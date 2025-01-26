@@ -32,7 +32,7 @@ tr:hover {
     background-color: #f1f1f1; /* Couleur au survol des lignes */
 }
 
-a {
+.ajoutFournisseur {
     display: inline-block; /* Afficher en ligne */
     margin: 10px 0; /* Marge autour des liens */
     padding: 10px 15px; /* Espacement interne */
@@ -42,7 +42,7 @@ a {
     border-radius: 4px; /* Coins arrondis */
 }
 
-a:hover {
+.ajoutFournisseur:hover {
     background-color: #994e4c; /* Couleur au survol des liens */
 }
 

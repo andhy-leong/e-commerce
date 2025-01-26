@@ -23,7 +23,7 @@
     </div>
 <?php endif; ?>
 
-<a href="admin.php?action=ajouterFournisseurForm">Ajouter un Fournisseur</a>
+<a class="ajoutFournisseur" href="admin.php?action=ajouterFournisseurForm">Ajouter un Fournisseur</a>
 
 <table>
     <thead>
@@ -47,8 +47,8 @@
                 <td><?= htmlspecialchars($fournisseur['telephone']) ?></td>
                 <td><?= htmlspecialchars($fournisseur['produits_vendus']) ?></td>
                 <td>
-                    <a href="admin.php?action=modifierFournisseurForm&id=<?= $fournisseur['id'] ?>">Modifier</a>
-                    <a href="admin.php?action=supprimerFournisseur&id=<?= $fournisseur['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fournisseur ?');">Supprimer</a>
+                    <a class="ajoutFournisseur" href="admin.php?action=modifierFournisseurForm&id=<?= $fournisseur['id'] ?>">Modifier</a>
+                    <a class="ajoutFournisseur" href="admin.php?action=supprimerFournisseur&id=<?= $fournisseur['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fournisseur ?');">Supprimer</a>
                 </td>
             </tr>
         <?php endforeach; ?>
