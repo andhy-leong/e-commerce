@@ -15,7 +15,7 @@
     </div>
 </header>
 <h1>Liste des Produits</h1>
-    <a href="admin.php?action=ajouterProduitForm">Ajouter un produit</a>
+    <a class="produits" href="admin.php?action=ajouterProduitForm">Ajouter un produit</a>
 
     <table>
         <thead>
@@ -50,7 +50,7 @@
                         <td><input type="text" name="provenance" value="<?= htmlspecialchars($produit['provenance'] ?? '') ?>" required></td>
                         <td>
                             <button type="submit">Modifier</button>
-                            <a href="admin.php?action=supprimerProduit&id=<?= htmlspecialchars($produit['identifiant'] ?? '') ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
+                            <a class="produits" href="admin.php?action=supprimerProduit&id=<?= htmlspecialchars($produit['identifiant'] ?? '') ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
                         </td>
                     </form>
                 </tr>

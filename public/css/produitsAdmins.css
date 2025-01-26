@@ -8,7 +8,7 @@ h1 {
     margin-top: 20px; /* Marge au-dessus du titre */
 }
 
-a {
+.produits {
     display: inline-block; /* Afficher en ligne */
     margin: 10px 0; /* Marge autour des liens */
     padding: 10px 15px; /* Espacement interne */
@@ -18,7 +18,7 @@ a {
     border-radius: 4px; /* Coins arrondis */
 }
 
-a:hover {
+.produits:hover {
     background-color: #994e4c; /* Couleur au survol des liens */
 }
 
