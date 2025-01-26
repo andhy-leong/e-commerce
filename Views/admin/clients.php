@@ -5,6 +5,7 @@
     <title>Gestion des Clients</title>
     <link rel="stylesheet" type="text/css" href="../public/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="../public/css/adminClients.css"/>
+    
 </head>
 <body>
 <header>
@@ -15,7 +16,7 @@
         </div>
     </header>
     <h1>Liste des Clients</h1>
-    <a href="admin.php?action=ajouterClientForm">Inscrire un client</a>
+    <a class="clients" href="admin.php?action=ajouterClientForm">Inscrire un client</a>
     <table>
         <thead>
             <tr>
@@ -38,7 +39,7 @@
                     <td><?= htmlspecialchars($client['telephone']) ?></td>
                     <td><?= htmlspecialchars($client['adresse']) ?></td>
                     <td>
-                        <a href="admin.php?action=supprimerClient&id=<?= $client['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?');">Supprimer le client</a>
+                        <a class="clients"href="admin.php?action=supprimerClient&id=<?= $client['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?');">Supprimer le client</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
