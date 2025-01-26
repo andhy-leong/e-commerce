@@ -62,5 +62,22 @@ class AdminController {
         var_dump($clients); // Ajoutez ceci pour voir les données
         require __DIR__ . '/../Views/admin/clients.php'; // Afficher la vue
     }
+
+    public function login() {
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+        $admin = $this->getAdminByUsername($username);
+        if ($admin && password_verify($password, $admin['password'])) {
+            $_SESSION['admin_id'] = $admin['id'];
+            header('Location: admin.php?action=afficherDashboard');
+            exit();
+        } else {
+            // Ajoutez le message d'erreur dans la session
+            $_SESSION['error_message'] = "Nom d'utilisateur ou mot de passe incorrect.";
+            header('Location: admin.php?action=loginForm');
+            exit();
+        }
+    }
 }
 ?> 

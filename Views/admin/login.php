@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css"  href="../public/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="../public/css/login.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/error.css"/>
     <script src="../public/js/passwordShow.js"></script>
 </head>
 <body>
@@ -18,8 +19,10 @@
     </header>
     <h1>Connexion Administrateur</h1>
     <?php if (isset($_SESSION['error_message'])): ?>
-        <p class="error-message"><?= htmlspecialchars($_SESSION['error_message']) ?></p>
-        <?php unset($_SESSION['error_message']); ?>
+        <div class="error-message" style="color: red; text-align: center;">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+            <?php unset($_SESSION['error_message']); ?>
+        </div>
     <?php endif; ?>
     <form action="admin.php?action=login" method="post">
         <label for="username">Nom d'utilisateur :</label>

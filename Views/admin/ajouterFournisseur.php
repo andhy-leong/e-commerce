@@ -37,7 +37,7 @@
         <option value="Boucle d'oreille">Boucle d'oreille</option>
     </select>
     <br>
-    <button type="submit">Ajouter le Fournisseur</button>
+    <button class="boutonAjouter" type="submit">Ajouter le Fournisseur</button>
 </form>
 </body>
 </html> 
