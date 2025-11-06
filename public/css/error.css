@@ -1,0 +1,6 @@
+.error-message {
+    color: red; /* Couleur du texte d'erreur */
+    text-align: center; /* Centrer le texte */
+    margin-top: 20px; /* Marge au-dessus du message */
+    font-weight: bold; /* Mettre le texte en gras */
+} 

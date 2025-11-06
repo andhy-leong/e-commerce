@@ -1,0 +1,63 @@
+body {
+    background-color: #f5f5f5; /* Couleur de fond de la page */
+    font-family: Arial, Helvetica, sans-serif; /* Police de la page */
+}
+
+h1 {
+    text-align: center; /* Centrer le titre */
+    margin-top: 20px; /* Marge au-dessus du titre */
+}
+
+.clients {
+    display: inline-block; /* Afficher en ligne */
+    margin: 10px 0; /* Marge autour des liens */
+    padding: 10px 15px; /* Espacement interne */
+    background-color: #963B38; /* Couleur de fond des liens */
+    color: white; /* Couleur du texte */
+    text-decoration: none; /* Pas de soulignement */
+    border-radius: 4px; /* Coins arrondis */
+}
+
+.clients:hover {
+    background-color: #994e4c; /* Couleur au survol des liens */
+}
+
+table {
+    width: 100%; /* Largeur de la table */
+    border-collapse: collapse; /* Fusionner les bordures */
+    margin-top: 20px; /* Marge au-dessus de la table */
+}
+
+th, td {
+    border: 1px solid #ddd; /* Bordure des cellules */
+    padding: 8px; /* Espacement interne des cellules */
+    text-align: left; /* Alignement du texte à gauche */
+}
+
+th {
+    background-color: #f2f2f2; /* Couleur de fond des en-têtes */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Couleur au survol des lignes */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    margin: 10px 0; /* Ajoute une marge en haut et en bas */
+    padding: 8px; /* Ajoute un rembourrage à l'intérieur des zones de texte */
+    width: calc(100% - 20px); /* Ajuste la largeur pour tenir compte du rembourrage */
+    box-sizing: border-box; /* Inclut le rembourrage dans la largeur totale */
+}
+
+label {
+    display: block; /* Affiche les étiquettes sur une nouvelle ligne */
+    margin-bottom: 5px; /* Ajoute un espace entre l'étiquette et la zone de texte */
+} 

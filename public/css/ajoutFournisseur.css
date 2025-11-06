@@ -1,0 +1,48 @@
+body {
+    background-color: #f5f5f5; /* Couleur de fond de la page */
+    font-family: Arial, Helvetica, sans-serif; /* Police de la page */
+}
+
+h1 {
+    text-align: center; /* Centrer le titre */
+    margin-top: 20px; /* Marge au-dessus du titre */
+}
+
+form {
+    background-color: white; /* Couleur de fond du formulaire */
+    padding: 20px; /* Espacement interne du formulaire */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre autour du formulaire */
+    max-width: 400px; /* Largeur maximale du formulaire */
+    margin: 20px auto; /* Centrer le formulaire horizontalement */
+}
+
+label {
+    display: block; /* Afficher les labels en bloc */
+    margin-bottom: 5px; /* Marge en bas des labels */
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: calc(100% - 20px); /* Largeur à 100% moins le rembourrage */
+    padding: 10px; /* Espacement interne */
+    margin-bottom: 15px; /* Marge en bas des champs */
+    border: 1px solid #ccc; /* Bordure des champs */
+    border-radius: 4px; /* Coins arrondis des champs */
+}
+
+button {
+    background-color: #963B38; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte du bouton */
+    padding: 10px; /* Espacement interne du bouton */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis du bouton */
+    cursor: pointer; /* Curseur pointer pour indiquer clic possible */
+    width: 100%; /* Largeur à 100% */
+    margin-bottom: 15px; /* Ajout d'espace en bas du bouton */
+}
+
+button:hover {
+    background-color: #7a2a2a; /* Couleur au survol du bouton */
+} 

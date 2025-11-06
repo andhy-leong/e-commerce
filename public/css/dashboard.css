@@ -1,0 +1,101 @@
+body {
+    background-color: #f5f5f5; /* Couleur de fond de la page */
+    font-family: Arial, Helvetica, sans-serif; /* Police de la page */
+    display: flex; /* Utiliser flexbox pour le corps */
+    flex-direction: column; /* Disposition verticale */
+    align-items: center; /* Centrer les éléments horizontalement */
+}
+
+header {
+    width: 100%; /* Prendre 100% de la largeur de la page */
+    background-color: #963B38; /* Couleur d'arrière-plan de l'en-tête */
+    padding: 10px; /* Espacement interne */
+    display: flex; /* Utiliser flexbox pour le header */
+    justify-content: center; /* Centrer le contenu horizontalement */
+    align-items: center; /* Centrer le contenu verticalement */
+}
+
+header img {
+    max-height: 100px; /* Hauteur maximale de l'image */
+    height: auto; /* Maintenir l'aspect ratio */
+    width: auto; /* Laisser la largeur automatique */
+}
+
+h1 {
+    text-align: center; /* Centrer le titre */
+    margin-top: 20px; /* Marge au-dessus du titre */
+}
+
+nav {
+    display: flex; /* Utiliser flexbox pour la navigation */
+    flex-direction: column; /* Disposition verticale */
+    margin: 20px; /* Marge autour de la navigation */
+    max-width: 300px; /* Limiter la largeur de la navigation */
+    align-items: center; /* Centrer les éléments horizontalement */
+    justify-content: center; /* Centrer les éléments verticalement */
+    width: 100%; /* Prendre toute la largeur disponible */
+}
+
+nav a {
+    margin: 5px 0; /* Réduire la marge entre les liens de navigation */
+    text-decoration: none; /* Pas de soulignement */
+    color: #fff; /* Couleur du texte */
+    padding: 12px 15px; /* Augmenter l'espacement interne pour plus d'épaisseur */
+    background-color: #7a2a2a; /* Couleur de fond des liens */
+    border-radius: 5px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte */
+    width: 100%; /* Prendre toute la largeur disponible */
+}
+
+nav a:hover {
+    background-color: #993b3b; /* Couleur au survol des liens */
+}
+
+.container {
+    max-width: 800px; /* Limiter la largeur du conteneur principal */
+    margin: 20px auto; /* Centrer le conteneur avec une marge */
+    padding: 20px; /* Espacement interne du conteneur */
+    background-color: white; /* Couleur de fond du conteneur */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre autour du conteneur */
+    display: flex; /* Utiliser flexbox */
+    flex-direction: column; /* Disposition verticale */
+    align-items: center; /* Centrer les éléments horizontalement */
+}
+
+.table {
+    width: 100%; /* Largeur de la table */
+    border-collapse: collapse; /* Fusionner les bordures */
+    margin-top: 20px; /* Marge au-dessus de la table */
+}
+
+.table th, .table td {
+    border: 1px solid #ddd; /* Bordure des cellules */
+    padding: 10px; /* Espacement interne des cellules */
+    text-align: center; /* Centrer le texte dans les cellules */
+}
+
+.table th {
+    background-color: #f2f2f2; /* Couleur de fond des en-têtes */
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+.table tr:hover {
+    background-color: #f1f1f1; /* Couleur au survol des lignes */
+}
+
+.button {
+    background-color: #963B38; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte du bouton */
+    padding: 10px 15px; /* Espacement interne du bouton */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointer pour indiquer clic possible */
+}
+
+.button:hover {
+    background-color: #7a2a2a; /* Couleur au survol du bouton */
+} 
