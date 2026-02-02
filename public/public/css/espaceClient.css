@@ -1,0 +1,148 @@
+body {
+  background-color: #f5f5f5; /* Couleur de fond de la page */
+  font-family: Arial, Helvetica, sans-serif; /* Police de la page */
+}
+
+header {
+  display: flex;
+  justify-content: center; /* Centrer le contenu */
+  background-color: #963b38; /* Couleur d'arrière-plan de l'en-tête */
+  padding: 10px; /* Espacement interne */
+}
+
+header img {
+  max-height: 100px; /* Hauteur maximale de l'image */
+}
+
+h1 {
+  text-align: center; /* Centrer le titre */
+  margin-top: 20px; /* Marge au-dessus du titre */
+}
+
+h2 {
+  text-align: center; /* Centrer le texte */
+  margin-top: 20px; /* Marge au-dessus du titre */
+  margin-bottom: 10px; /* Marge en bas du titre */
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  color: #155724;
+  background-color: #d4edda; /* Couleur de fond verte */
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+form {
+  background-color: white; /* Couleur de fond du formulaire */
+  padding: 20px; /* Espacement interne du formulaire */
+  border-radius: 5px; /* Coins arrondis */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre autour du formulaire */
+  max-width: 400px; /* Largeur maximale du formulaire */
+  margin: 20px auto; /* Centrer le formulaire horizontalement */
+}
+
+label {
+  display: block; /* Afficher les labels en bloc */
+  margin-bottom: 5px; /* Marge en bas des labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+  width: calc(100% - 20px); /* Largeur à 100% moins le rembourrage */
+  padding: 10px; /* Espacement interne */
+  margin-bottom: 15px; /* Marge en bas des champs */
+  border: 1px solid #ccc; /* Bordure des champs */
+  border-radius: 4px; /* Coins arrondis des champs */
+}
+
+button {
+  background-color: #963b38; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  padding: 10px; /* Espacement interne du bouton */
+  border: none; /* Pas de bordure */
+  border-radius: 4px; /* Coins arrondis du bouton */
+  cursor: pointer; /* Curseur pointer pour indiquer clic possible */
+  width: 100%; /* Largeur à 100% */
+}
+
+button:hover {
+  background-color: #7a2a2a; /* Couleur au survol du bouton */
+}
+
+table {
+  width: 100%; /* Largeur de la table */
+  border-collapse: collapse; /* Fusionner les bordures */
+  margin-top: 20px; /* Marge au-dessus de la table */
+}
+
+th,
+td {
+  border: 1px solid #ddd; /* Bordure des cellules */
+  padding: 8px; /* Espacement interne des cellules */
+  text-align: left; /* Alignement du texte à gauche */
+}
+
+th {
+  background-color: #f2f2f2; /* Couleur de fond des en-têtes */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* Couleur au survol des lignes */
+}
+
+/* --- RESPONSIVE MOBILE (Ajouté) --- */
+@media (max-width: 600px) {
+  /* Le formulaire prend presque toute la largeur de l'écran */
+  form {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    box-sizing: border-box; /* Empêche le padding d'agrandir la div */
+  }
+
+  /* On s'assure que les champs ne dépassent pas */
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  button {
+    width: 100%;
+    box-sizing: border-box; /* Très important pour inclure le padding dans la largeur */
+    margin-right: 0; /* Annule la marge droite du CSS desktop */
+  }
+
+  /* Header plus compact */
+  header img {
+    max-height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Rend le tableau scrollable horizontalement si trop large */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 10px 5px; /* Réduit un peu l'espacement */
+    font-size: 0.9rem; /* Police un peu plus petite */
+  }
+}

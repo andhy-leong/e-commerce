@@ -1,0 +1,186 @@
+body {
+  background-color: #f5f5f5; /* Couleur de fond de la page */
+  font-family: Arial, Helvetica, sans-serif; /* Police de la page */
+}
+
+h1 {
+  text-align: center; /* Centrer le titre */
+  margin-top: 20px; /* Marge au-dessus du titre */
+}
+
+/* Style des boutons/liens "Ajouter" */
+.produits {
+  display: inline-block; /* Afficher en ligne */
+  margin: 10px 0; /* Marge autour des liens */
+  padding: 10px 15px; /* Espacement interne */
+  background-color: #963b38; /* Couleur de fond des liens */
+  color: white; /* Couleur du texte */
+  text-decoration: none; /* Pas de soulignement */
+  border-radius: 4px; /* Coins arrondis */
+}
+
+.produits:hover {
+  background-color: #994e4c; /* Couleur au survol des liens */
+}
+
+/* Table */
+table {
+  width: 100%; /* Largeur de la table */
+  border-collapse: collapse; /* Fusionner les bordures */
+  margin-top: 20px; /* Marge au-dessus de la table */
+  table-layout: fixed; /* Empêche le contenu de casser la largeur des colonnes */
+}
+
+th,
+td {
+  border: 1px solid #ddd; /* Bordure des cellules */
+  padding: 8px; /* Espacement interne des cellules */
+  text-align: left; /* Alignement du texte à gauche */
+  word-wrap: break-word; /* Coupe les mots longs */
+}
+
+th {
+  background-color: #f2f2f2; /* Couleur de fond des en-têtes */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* Couleur au survol des lignes */
+}
+
+/* Nouveau : Classe pour stock faible */
+tr.stock-faible {
+  background-color: #fff0f0; /* Fond rouge clair */
+  color: #a00; /* Texte rouge foncé */
+}
+
+tr.stock-faible strong {
+  color: #dc3545; /* Rouge vif pour le message */
+}
+
+/* Nouveau : Largeurs de colonnes */
+.col-ref {
+  width: 8%;
+}
+.col-titre {
+  width: 15%;
+}
+.col-prix {
+  width: 8%;
+}
+.col-stock {
+  width: 8%;
+}
+.col-img {
+  width: 7%;
+}
+.col-desc {
+  width: 34%;
+}
+.col-actions {
+  width: 12%;
+}
+
+/* Nouveau : Style pour la miniature de l'image */
+.img-miniature {
+  max-width: 100%;
+  height: auto;
+  max-height: 60px;
+  border-radius: 4px;
+}
+
+/* Nouveau : Conteneur pour le descriptif */
+.col-desc-contenu {
+  max-height: 100px;
+  overflow-y: auto; /* Ajoute une barre de défilement si le texte est trop long */
+  display: block;
+}
+
+/* Nouveau : Styles pour les boutons d'action */
+.actions-cell {
+  text-align: center;
+}
+
+.bouton-modifier,
+.bouton-supprimer {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 2px;
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.bouton-modifier {
+  background-color: #007bff; /* Bleu */
+}
+.bouton-modifier:hover {
+  background-color: #0069d9;
+}
+
+.bouton-supprimer {
+  background-color: #dc3545; /* Rouge */
+}
+.bouton-supprimer:hover {
+  background-color: #c82333;
+}
+
+/* Messages de succès/erreur (déjà présents dans fournisseurs.css) */
+.message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  text-align: center;
+}
+.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+/* --- RESPONSIVE MOBILE TABLEAUX --- */
+@media (max-width: 1000px) {
+  /* Rend le conteneur principal fluide */
+  main,
+  .container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+  }
+
+  /* Rend le tableau scrollable horizontalement */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Apparition d'une barre de défilement si trop large */
+    white-space: nowrap; /* Empêche le texte de se casser n'importe comment */
+  }
+
+  /* Ajustement de la taille du texte pour gagner de la place */
+  th,
+  td {
+    padding: 8px 5px;
+    font-size: 0.9rem;
+  }
+
+  /* Ajustement des boutons d'action (Modifier/Supprimer) dans le tableau */
+  td a,
+  td button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    margin: 2px;
+  }
+
+  /* Titres plus petits */
+  h1,
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
