@@ -174,8 +174,8 @@
                             <img src="../Ressources/git-icon.png" alt="">
                         </a>
     
-                        <a href="https://univ-cotedazur.fr/annuaire/leong-foc-sing-andhy-raharison">
-                            <img src="../Ressources/iut-icon.png" alt="">
+                        <a href="https://www.youtube.com/@andhy_leong">
+                            <img src="../Ressources/youtube-icon.png" alt="">
                         </a>
                     </div>
                 </div>
