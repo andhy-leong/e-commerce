@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/error.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../public/js/passwordShow.js"></script>
+    <script src="js/passwordShow.js"></script>
 </head>
 <body>
 <header>
         <div>
             <a href="admin.php?action=afficherDashboard">
-                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+                <img src="Ressources/vangovibeslogo.png" alt="logo">
             </a>
         </div>
     </header>

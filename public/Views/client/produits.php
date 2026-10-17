@@ -10,56 +10,60 @@
     <nav class="navigation">
         <div class="logo">
             <a href="client.php?action=afficherProduits">
-                <img src="Ressources/vangovibeslogo.png" alt="logo">
+                <img src="Ressources/vangovibeslogo.png" alt="logo VangoVibes">
             </a>
         </div>
 
         <div class="rechercher">
-            <!--
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#151515">
-                    <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
-                </svg>
-            </span>
-            !-->
-            <form method="get" action="client.php" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+            <form method="get" action="client.php">
                 <input type="hidden" name="action" value="afficherProduits">
-                <input type="search" placeholder="Rechercher un produit" style="flex: 1; margin-right: 10px; padding: 8px;">
-                <button type="submit" style="padding: 8px 15px;">Rechercher</button>
+                <input type="search" name="search" placeholder="Rechercher un produit..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                <button type="submit">Rechercher</button>
             </form>
         </div>
+
         <div class="utilisateur">    
             <?php if (isset($_SESSION['client_id'])): ?>
-            <?= htmlspecialchars($_SESSION['client_prenom'] ) . ' ' . htmlspecialchars($_SESSION['client_nom'] ) ?>
-            <a href="client.php?action=espaceClient" class="connexion"><img src="../Ressources/connexionlogo.png" alt="Connexion"></a>
+                <span class="user-greeting"><?= htmlspecialchars($_SESSION['client_prenom'] ) . ' ' . htmlspecialchars($_SESSION['client_nom'] ) ?></span>
+                <a href="client.php?action=espaceClient" class="connexion" title="Espace client">
+                    <img src="Ressources/connexionlogo.png" alt="Connexion">
+                </a>
             <?php else: ?>
-            <a href="client.php?action=loginForm"><img src="../Ressources/connexionlogo.png" alt="Connexion"></a>
+                <a href="client.php?action=loginForm" class="connexion" title="Se connecter">
+                    <img src="Ressources/connexionlogo.png" alt="Connexion">
+                </a>
             <?php endif; ?>
-            <a href="client.php?action=afficherPanier" class="panier"><img src="../Ressources/panierlogo.png" alt="Panier"><p>Panier</p></a>
+            <a href="client.php?action=afficherPanier" class="panier" title="Panier">
+                <img src="Ressources/panierlogo.png" alt="Panier">
+                <p>Panier</p>
+                <?php if (!empty($_SESSION['panier_count'])): ?>
+                    <span class="panier-count"><?= (int)$_SESSION['panier_count'] ?></span>
+                <?php endif; ?>
+            </a>
         </div>
     </nav>
 
     <?php if (isset($_SESSION['confirmation_message'])): ?>
         <div class="message success"><?= htmlspecialchars($_SESSION['confirmation_message']) ?></div>
-        <?php unset($_SESSION['confirmation_message']); // Supprimer le message après l'affichage ?>
+        <?php unset($_SESSION['confirmation_message']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['message'])): ?>
         <div class="message"><?= htmlspecialchars($_SESSION['message']) ?></div>
-        <?php unset($_SESSION['message']); // Supprimer le message après l'affichage ?>
+        <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
 
     <header>
         <div class="carousel">
             <ul class="carousel-track">
                 <li class="carousel-slide current-slide">
-                    <img src="../Ressources/vangovango_accueil1.jpg" alt="Image 1">
+                    <img src="Ressources/vangovango_accueil1.jpg" alt="Vangovango artisanal">
                 </li>
                 <li class="carousel-slide">
-                    <img src="../Ressources/vangovango_accueil2.jpg" alt="Image 2">
+                    <img src="Ressources/vangovango_accueil2.jpg" alt="Collection de bracelets">
                 </li>
                 <li class="carousel-slide">
-                    <img src="../Ressources/vangovango_accueil3.jpg" alt="Image 3">
+                    <img src="Ressources/vangovango_accueil3.jpg" alt="Artisanat malgache">
                 </li>
             </ul>
             <div class="carousel-indicators">
@@ -79,7 +83,7 @@
     </header>
 
     <main>
-    <div class="informations">
+        <div class="informations">
             <div class="card">
                 <h2>Le Bracelet Vangovango</h2>
                 <p>Originaire de Madagascar, ce bracelet traditionnel est célèbre pour sa beauté et son artisanat. Chaque pièce unique est fabriquée avec soin à partir de matériaux nobles, offrant une qualité exceptionnelle et un design intemporel.</p>
@@ -91,43 +95,60 @@
             </div>
 
             <div class="info-image">
-                <img src="../Ressources/vangovango_info.png" alt="">
+                <img src="Ressources/vangovango_info.png" alt="Illustration Vangovango">
             </div>
         </div>
 
-        <form method="get" action="client.php">
+        <div class="section-titre">
+            <h2>Nos Créations</h2>
+        </div>
+
+        <form method="get" action="client.php" class="form-tri">
             <input type="hidden" name="action" value="afficherProduits">
+            <?php if (!empty($_GET['search'])): ?>
+                <input type="hidden" name="search" value="<?= htmlspecialchars($_GET['search']) ?>">
+            <?php endif; ?>
             <label for="sort">Trier par :</label>
             <select name="sort" id="sort">
-                <option value="nom_asc">Nom (A-Z)</option>
-                <option value="nom_desc">Nom (Z-A)</option>
-                <option value="prix_asc">Prix (croissant)</option>
-                <option value="prix_desc">Prix (décroissant)</option>
+                <option value="nom_asc" <?= (isset($_GET['sort']) && $_GET['sort'] === 'nom_asc') ? 'selected' : '' ?>>Nom (A-Z)</option>
+                <option value="nom_desc" <?= (isset($_GET['sort']) && $_GET['sort'] === 'nom_desc') ? 'selected' : '' ?>>Nom (Z-A)</option>
+                <option value="prix_asc" <?= (isset($_GET['sort']) && $_GET['sort'] === 'prix_asc') ? 'selected' : '' ?>>Prix (croissant)</option>
+                <option value="prix_desc" <?= (isset($_GET['sort']) && $_GET['sort'] === 'prix_desc') ? 'selected' : '' ?>>Prix (décroissant)</option>
             </select>
             <button type="submit">Trier</button>
         </form>
 
         <div class="produit-grid">
-            <?php foreach ($produits as $produit): ?>
+            <?php foreach ($produits as $produit): 
+                $imagePath = str_replace('../Ressources/', 'Ressources/', $produit['image']);
+            ?>
                 <div class="produit">
-                    <!--A utiliser quand je veux faire une page pour afficher en details les produits -->
-                    <!--<a href="client.php?action=afficherProduit&id=<?= htmlspecialchars($produit['identifiant']) ?>"> -->
-                    <img src="<?= htmlspecialchars($produit['image']) ?>" alt="<?= htmlspecialchars($produit['titre']) ?>" style="width:350px; height:350px;"><!--</a>-->
+                    <div class="produit-image-container">
+                        <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($produit['titre']) ?>" class="produit-img" loading="lazy">
+                    </div>
                     <h2><?= htmlspecialchars($produit['titre']) ?></h2>
-                    <p>Référence: <?= htmlspecialchars($produit['reference']) ?></p>
-                    <p><?= htmlspecialchars($produit['descriptif']) ?></p>
-                    <p>Provenance: <?= htmlspecialchars($produit['provenance']) ?></p>
-                    <p>Taille: <?= htmlspecialchars($produit['taille']) ?></p>
-                    <p>Matériaux: <?= htmlspecialchars($produit['couleur']) ?></p>
-                    <p>Prix: <?= htmlspecialchars($produit['prix_public']) ?> €</p>
-                    <form method="post" action="client.php?action=ajouterAuPanier">
+                    <p class="reference">Réf : <?= htmlspecialchars($produit['reference']) ?></p>
+                    <p class="description"><?= htmlspecialchars($produit['descriptif']) ?></p>
+                    <div class="caracteristiques">
+                        <span><strong>Provenance:</strong> <?= htmlspecialchars($produit['provenance']) ?></span>
+                        <span><strong>Taille:</strong> <?= htmlspecialchars($produit['taille']) ?></span>
+                        <span><strong>Matière:</strong> <?= htmlspecialchars($produit['couleur']) ?></span>
+                    </div>
+                    <p class="prix"><?= htmlspecialchars($produit['prix_public']) ?> €</p>
+                    <form method="post" action="client.php?action=ajouterAuPanier" class="form-panier">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($produit['identifiant'] ?? '') ?>">
-                        <input type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>">
-                        <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>Ajouter au panier</button>
+                        <div class="panier-action">
+                            <label for="quantite-<?= htmlspecialchars($produit['identifiant']) ?>" class="sr-only">Quantité</label>
+                            <input id="quantite-<?= htmlspecialchars($produit['identifiant']) ?>" type="number" name="quantite" value="1" min="1" max="<?= htmlspecialchars($produit['quantite_stock'] ?? 1) ?>" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>
+                            <button type="submit" <?= ($produit['quantite_stock'] <= 0) ? 'disabled' : '' ?>>
+                                <?= ($produit['quantite_stock'] <= 0) ? 'Rupture' : 'Ajouter au panier' ?>
+                            </button>
+                        </div>
                     </form>
                 </div>
             <?php endforeach; ?>
         </div>
+
         <div class="apropos">
             <h2>Pourquoi choisir nos bracelets ?</h2>
             <p>
@@ -142,50 +163,44 @@
             </p>
         </div>
     </main>
-    <footer>
-            <div class="footer-element">
-                <div>
-                    <img src="../Ressources/vangovibeslogo.png" alt="">
-                </div>
-    
-                <div>
-                    <h3>Téléphone</h3>
-                    <p>+33 4 89 15 30 00</p>
-    
-                    <h3>Email</h3>
-                    <a href="mailto:andhylng29@gmail.com" class="contacter">vangovibes@gmail.com</a>
-                </div>
-    
-                <div class="reseaux">
-                    <h3>Réseaux sociaux</h3>
-    
-                    <div>
-                        <a href="https://www.linkedin.com/in/leong-foc-sing-andhy-raharison-2404322b7/">
-                            <img src="../Ressources/linkedin-icon.png" alt="">
-                        </a>
-    
-                        <a href="https://www.instagram.com/andhy_leong/">
-                            <img src="../Ressources/instagram-icon.png" alt="">
-                        </a>
-                    </div>
-    
-                    <div>
-                        <a href="https://github.com/andhy-leong">
-                            <img src="../Ressources/git-icon.png" alt="">
-                        </a>
-    
-                        <a href="https://univ-cotedazur.fr/annuaire/leong-foc-sing-andhy-raharison">
-                            <img src="../Ressources/iut-icon.png" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="copyrigth">
-                <p>Copyright 2025 Vangovibes</p>
-            </div>
-        </footer>
 
-    <script src="../public/js/accueil.js"></script>
+    <footer>
+        <div class="footer-element">
+            <div class="footer-brand">
+                <img src="Ressources/vangovibeslogo.png" alt="logo VangoVibes">
+                <p>L'authenticité et l'artisanat malgache à votre poignet.</p>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p><strong>Tél :</strong> +33 4 89 15 30 00</p>
+                <p><strong>Email :</strong> <a href="mailto:andhylng29@gmail.com" class="contacter">vangovibes@gmail.com</a></p>
+            </div>
+
+            <div class="reseaux">
+                <h3>Réseaux sociaux</h3>
+                <div class="reseaux-icons">
+                    <a href="https://www.linkedin.com/in/leong-foc-sing-andhy-raharison-2404322b7/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="Ressources/linkedin-icon.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://www.instagram.com/andhy_leong/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <img src="Ressources/instagram-icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://github.com/andhy-leong" target="_blank" rel="noopener" aria-label="GitHub">
+                        <img src="Ressources/git-icon.png" alt="GitHub">
+                    </a>
+                    <a href="https://www.youtube.com/@andhy_leong" target="_blank" rel="noopener" aria-label="YouTube">
+                        <img src="Ressources/youtube-icon.png" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyrigth">
+            <p>&copy; 2025 Vangovibes - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="js/accueil.js"></script>
 </body>
 </html>

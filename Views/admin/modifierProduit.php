@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 <header>
     <div>
         <a href="admin.php?action=afficherDashboard">
-            <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            <img src="Ressources/vangovibeslogo.png" alt="logo">
         </a>
     </div>
 </header>
@@ -53,7 +53,7 @@
     <label>Image actuelle :</label>
     <?php 
         // Corrige l'ancien mauvais chemin s'il est présent
-        $imagePath = str_replace('../Ressources/', 'Ressources/', $produit['image']); 
+        $imagePath = str_replace('Ressources/', 'Ressources/', $produit['image']); 
     ?>
     <img src="<?= htmlspecialchars($imagePath) ?>" alt="Image actuelle" style="max-width: 100px; max-height: 100px; margin-bottom: 10px; display: block; border-radius: 4px;">
     

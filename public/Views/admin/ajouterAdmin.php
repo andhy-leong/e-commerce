@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 <header>
         <div>
         <a href="admin.php?action=afficherDashboard">
-                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+                <img src="Ressources/vangovibeslogo.png" alt="logo">
             </a>
         </div>
     </header>

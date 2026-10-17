@@ -2,62 +2,53 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Gestion des Commandes</title>
-    <link rel="stylesheet" type="text/css"  href="css/header.css"/>
+    <title>Gestion des Commandes - VangoVibes</title>
+    <link rel="stylesheet" type="text/css" href="css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/adminClients.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
 </head>
 <body>
-<header>
+    <header>
         <div>
-        <a href="admin.php?action=afficherDashboard">
-                <img src="../Ressources/vangovibeslogo.png" alt="logo">
+            <a href="admin.php?action=afficherDashboard">
+                <img src="Ressources/vangovibeslogo.png" alt="logo VangoVibes">
             </a>
         </div>
     </header>
-    <h1>Liste des Commandes</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Numéro de Commande</th>
-                <th>Date</th>
-                <th>Prix Total HT</th>
-                <th>Prix Total TTC</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($commandes as $commande): ?>
-                <tr>
-                    <td><?= htmlspecialchars($commande['numero_commande']) ?></td>
-                    <td><?= htmlspecialchars($commande['date']) ?></td>
-                    <td><?= htmlspecialchars($commande['total_ht']) ?> €</td>
-                    <td><?= htmlspecialchars($commande['total_ttc']) ?> €</td>
-                    <td>
-                        <a href="admin.php?action=afficherDetailsCommande&id=<?= htmlspecialchars($commande['id']) ?>">Voir Détails</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+
+    <div class="admin-page-container">
+        <h1>Liste des Commandes</h1>
+
+        <div class="actions-bar">
+            <a class="clients btn-secondary" href="admin.php?action=afficherDashboard">&larr; Tableau de bord</a>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° Commande</th>
+                        <th>Date</th>
+                        <th>Prix Total HT</th>
+                        <th>Prix Total TTC</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($commandes as $commande): ?>
+                        <tr>
+                            <td><strong><?= htmlspecialchars($commande['numero_commande']) ?></strong></td>
+                            <td><?= htmlspecialchars($commande['date']) ?></td>
+                            <td><?= htmlspecialchars($commande['total_ht']) ?> €</td>
+                            <td style="color:#963B38; font-weight:700;"><?= htmlspecialchars($commande['total_ttc']) ?> €</td>
+                            <td>
+                                <a class="clients btn-primary" style="padding: 5px 10px; font-size: 13px; min-height: auto;" href="admin.php?action=afficherDetailsCommande&id=<?= htmlspecialchars($commande['id']) ?>">Voir Détails</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

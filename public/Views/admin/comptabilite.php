@@ -2,68 +2,57 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Comptabilité</title>
+    <title>Comptabilité - VangoVibes</title>
     <link rel="stylesheet" type="text/css" href="css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="css/produitsAdmins.css"/>
+    <link rel="stylesheet" type="text/css" href="css/comptabilite.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .profit {
-            color: green; /* Couleur pour le bénéfice */
-        }
-        .loss {
-            color: red; /* Couleur pour la perte */
-        }
-        table {
-            width: 100%; /* Largeur de la table */
-            border-collapse: collapse; /* Fusionner les bordures */
-            margin-top: 20px; /* Marge au-dessus de la table */
-        }
-        th, td {
-            border: 1px solid #ddd; /* Bordure des cellules */
-            padding: 8px; /* Espacement interne des cellules */
-            text-align: left; /* Alignement du texte à gauche */
-        }
-        th {
-            background-color: #f2f2f2; /* Couleur de fond des en-têtes */
-        }
-    </style>
 </head>
 <body>
-<header>
-    <div>
-        <a href="admin.php?action=afficherDashboard">
-            <img src="../Ressources/vangovibeslogo.png" alt="logo">
-        </a>
-    </div>
-</header>
-<h1>Comptabilité</h1>
+    <header>
+        <div>
+            <a href="admin.php?action=afficherDashboard">
+                <img src="Ressources/vangovibeslogo.png" alt="logo VangoVibes">
+            </a>
+        </div>
+    </header>
 
-<table>
-    <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Prix Public</th>
-            <th>Prix Achat</th>
-            <th>Bénéfice</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($produits as $produit): ?>
-            <?php
-                $prixPublic = $produit['prix_public'];
-                $prixAchat = $produit['prix_achat'];
-                $benefice = $prixPublic - $prixAchat;
-            ?>
-            <tr>
-                <td><?= htmlspecialchars($produit['titre']) ?></td>
-                <td><?= htmlspecialchars($prixPublic) ?> €</td>
-                <td><?= htmlspecialchars($prixAchat) ?> €</td>
-                <td class="<?= $benefice >= 0 ? 'profit' : 'loss' ?>">
-                    <?= htmlspecialchars($benefice) ?> €
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+    <div class="admin-page-container">
+        <h1>Comptabilité & Marges</h1>
+
+        <div class="actions-bar">
+            <a class="btn-retour" href="admin.php?action=afficherDashboard">&larr; Tableau de bord</a>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Prix Public</th>
+                        <th>Prix Achat</th>
+                        <th>Bénéfice Unitaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $totalBenefice = 0;
+                    foreach ($produits as $produit): 
+                        $prixPublic = $produit['prix_public'];
+                        $prixAchat = $produit['prix_achat'];
+                        $benefice = $prixPublic - $prixAchat;
+                    ?>
+                        <tr>
+                            <td><strong><?= htmlspecialchars($produit['titre']) ?></strong></td>
+                            <td><?= htmlspecialchars($prixPublic) ?> €</td>
+                            <td><?= htmlspecialchars($prixAchat) ?> €</td>
+                            <td class="<?= $benefice >= 0 ? 'profit' : 'loss' ?>">
+                                <strong><?= ($benefice >= 0 ? '+' : '') . htmlspecialchars($benefice) ?> €</strong>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
-</html> 
+</html>
